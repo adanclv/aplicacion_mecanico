@@ -1,5 +1,7 @@
+import 'package:aplicacion_mecanico/util/botton_add_icon.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MainApp());
@@ -39,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       builder: (BuildContext context) {
         return Container(
-          height: 300,
+          height: 350,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -52,62 +54,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Icon(Icons.close)),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(255, 200, 210, 227)),
-                      child: Icon(
-                        Icons.account_circle_rounded,
-                        size: 30,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      child: Text(
-                        'Crear Cliente',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )
-                  ],
-                ),
+              GestureDetector(
+                onTap: () {
+                  print('funciona');
+                },
+                child: BottonAddIcon(
+                    iconName: Icons.account_circle_rounded,
+                    textName: 'Crear Cliente'),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(255, 200, 210, 227)),
-                      child: Icon(
-                        Icons.airport_shuttle_sharp,
-                        size: 30,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      child: Text(
-                        'Agregar Vehiculo',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )
-                  ],
-                ),
+              GestureDetector(
+                onTap: () {},
+                child: BottonAddIcon(
+                    iconName: Icons.airport_shuttle_sharp,
+                    textName: 'Agregar Vehiculo'),
               ),
+              GestureDetector(
+                onTap: () {},
+                child: BottonAddIcon(
+                    iconName: Icons.build_circle, textName: 'Agregar Servicio'),
+              )
             ],
           ),
         );
@@ -145,6 +110,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            systemNavigationBarColor: Color.fromARGB(255, 19, 29, 39)),
+      ),
       backgroundColor: const Color(0xFF15202B),
       body: SafeArea(
         child: Column(
@@ -181,22 +153,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.assignment_outlined),
                     activeIcon: Icon(Icons.assignment_add),
                     label: 'Citas',
-                    backgroundColor: Color(0xFF15202B)),
+                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.add_box_outlined),
                     activeIcon: Icon(Icons.add_box_rounded),
                     label: 'Agregar',
-                    backgroundColor: Color(0xFF15202B)),
+                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.contact_emergency_outlined),
                     activeIcon: Icon(Icons.contact_emergency_rounded),
                     label: 'Clientes',
-                    backgroundColor: Color(0xFF15202B)),
+                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.event_repeat_outlined),
                     activeIcon: Icon(Icons.event_repeat_rounded),
                     label: 'Historial',
-                    backgroundColor: Color(0xFF15202B)),
+                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
               ],
             )
           ],
