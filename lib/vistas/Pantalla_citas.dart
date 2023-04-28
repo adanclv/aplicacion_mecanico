@@ -1,3 +1,4 @@
+import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:flutter/material.dart';
 
 class Pantalla_citas extends StatefulWidget {
@@ -101,7 +102,14 @@ class _Pantalla_citas extends State<Pantalla_citas> {
               child: FloatingActionButton(
                 backgroundColor: Colors.white,
                 focusColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Registro_citas(),
+                    ),
+                  );
+                },
                 child: Icon(
                   Icons.add,
                   color: Theme.of(context).primaryColor,

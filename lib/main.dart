@@ -2,6 +2,7 @@ import 'package:aplicacion_mecanico/util/botton_add_icon.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
+import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,10 +27,13 @@ class MainApp extends StatelessWidget {
       800: Color(0xFF0A161E),
       900: Color(0xFF060D12),
     });
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: myColor),
-      home: const MyHomePage(),
+      theme: ThemeData(
+          primarySwatch: myColor, secondaryHeaderColor: Color(0xFFE6EFFF)),
+      home: //const Registro_citas(),
+          const MyHomePage(),
     );
   }
 }
@@ -131,51 +135,59 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: pagina,
               ),
             ),
-            BottomNavigationBar(
-              selectedFontSize: 12,
-              unselectedFontSize: 10,
-              showUnselectedLabels: true,
-              iconSize: 32,
-              currentIndex: i,
-              onTap: (value) {
-                setState(() {
-                  aux = i;
-                  i = value;
-                  print(aux);
-                  if (i == 2) {
-                    mostrarBottomSheet();
-                    i = aux;
-                  }
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined),
-                    activeIcon: Icon(Icons.home_rounded),
-                    label: 'Principal',
-                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.assignment_outlined),
-                    activeIcon: Icon(Icons.assignment_add),
-                    label: 'Citas',
-                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add_box_outlined),
-                    activeIcon: Icon(Icons.add_box_rounded),
-                    label: 'Agregar',
-                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.contact_emergency_outlined),
-                    activeIcon: Icon(Icons.contact_emergency_rounded),
-                    label: 'Clientes',
-                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.event_repeat_outlined),
-                    activeIcon: Icon(Icons.event_repeat_rounded),
-                    label: 'Historial',
-                    backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-              ],
-            )
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: Colors.white24, width: 0.5),
+                ),
+              ),
+              child: BottomNavigationBar(
+                unselectedItemColor: Colors.white54,
+                selectedFontSize: 12,
+                unselectedFontSize: 10,
+                showUnselectedLabels: true,
+                iconSize: 32,
+                currentIndex: i,
+                onTap: (value) {
+                  setState(() {
+                    aux = i;
+                    i = value;
+                    print(aux);
+                    if (i == 2) {
+                      mostrarBottomSheet();
+                      i = aux;
+                    }
+                  });
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home_outlined),
+                      activeIcon: Icon(Icons.home_rounded),
+                      label: 'Principal',
+                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.assignment_outlined),
+                      activeIcon: Icon(Icons.assignment_add),
+                      label: 'Citas',
+                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.add_box_outlined),
+                      activeIcon: Icon(Icons.add_box_rounded),
+                      label: 'Agregar',
+                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.contact_emergency_outlined),
+                      activeIcon: Icon(Icons.contact_emergency_rounded),
+                      label: 'Clientes',
+                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.event_repeat_outlined),
+                      activeIcon: Icon(Icons.event_repeat_rounded),
+                      label: 'Historial',
+                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
+                ],
+              ),
+            ),
           ],
         ),
       ),

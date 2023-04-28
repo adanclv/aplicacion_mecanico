@@ -15,7 +15,7 @@ class Container_CupertinoSegmentedControl extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: indexN == i ? Colors.white : Color(0xFF15202B),
+            color: indexN == i ? Color(0xFf95A6DC) : Color(0xFF15202B),
           ),
         ),
       ),
