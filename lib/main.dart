@@ -1,4 +1,6 @@
 import 'package:aplicacion_mecanico/util/botton_add_icon.dart';
+import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
+import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,9 +14,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MaterialColor myColor = MaterialColor(0xFF15202B, {
+      50: Color(0xFFE1E2E3),
+      100: Color(0xFFB6B8B9),
+      200: Color(0xFF8C8F91),
+      300: Color(0xFF626669),
+      400: Color(0xFF3B3F42),
+      500: Color(0xFF15202B),
+      600: Color(0xFF121E28),
+      700: Color(0xFF0E1A23),
+      800: Color(0xFF0A161E),
+      900: Color(0xFF060D12),
+    });
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: ThemeData(primarySwatch: myColor),
       home: const MyHomePage(),
     );
   }
@@ -88,21 +102,12 @@ class _MyHomePageState extends State<MyHomePage> {
         pagina = Pantalla_principal();
         break;
       case 1:
-        //pagina = Pantalla_citas();
+        pagina = Pantalla_citas();
         break;
       case 2:
-        if (aux == 0) {
-          pagina = Pantalla_principal();
-        } else if (aux == 1) {
-          //pagina = ;
-        } else if (aux == 3) {
-          //pagina = ;
-        } else if (aux == 4) {
-          //pagina = ;
-        }
         break;
       case 3:
-        //pagina = Pantalla_clientes();
+        pagina = Pantalla_clientes();
         break;
       case 4:
         //pagina = Pantalla_historial();
