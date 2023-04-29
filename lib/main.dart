@@ -3,6 +3,7 @@ import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
+import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -74,7 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  print('funciona');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Registro_clientes(),
+                    ),
+                  ).whenComplete(() => Navigator.pop(context));
                 },
                 child: BottonAddIcon(
                     iconName: Icons.account_circle_rounded,

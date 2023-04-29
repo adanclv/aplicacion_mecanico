@@ -245,7 +245,7 @@ class _Registro_citas extends State<Registro_citas> {
                   ),
                 ],
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -284,7 +284,7 @@ class _Registro_citas extends State<Registro_citas> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

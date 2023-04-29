@@ -15,7 +15,7 @@ class _Pantalla_principal extends State<Pantalla_principal> {
   String mensaje = '';
 
   String buenosDTN() {
-    if (horaActual > 0 && horaActual <= 11) {
+    if (horaActual > 5 && horaActual <= 11) {
       mensaje = 'Buenos Dias';
     } else if (horaActual >= 11 && horaActual < 20) {
       mensaje = 'Buenas Tardes';
@@ -63,10 +63,8 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                       EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   fillColor: Color(0xFFE6EFFF),
                   filled: true,
-                  label: Text(
-                    'Buscar...',
-                    style: TextStyle(color: Colors.black),
-                  ),
+                  hintText: 'Buscar...',
+                  hintStyle: TextStyle(color: Theme.of(context).primaryColor),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.circular(10)),
@@ -110,7 +108,7 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                   Icon(Icons.assignment_outlined,
                       color: Colors.white38, size: 150),
                   Text(
-                    'Sin Pendientes todavia',
+                    'Sin Pendientes',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                   Text(
