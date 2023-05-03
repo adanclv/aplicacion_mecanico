@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../util/text_Info.dart';
 
 class Registro_clientes extends StatefulWidget {
   const Registro_clientes({super.key});
@@ -22,37 +25,45 @@ class _Registro_clientes extends State<Registro_clientes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        shape: Border(bottom: BorderSide(color: Colors.white38, width: 0.2)),
+        title: Text_info(
+            cadena: 'Registro Cliente', opcion: 1, colores: Colors.white),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon:
+                  Icon(Icons.arrow_back_rounded, size: 25, color: Colors.white),
+            ),
+          ),
+        ],
+        toolbarHeight: 80,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            systemNavigationBarColor: Color.fromARGB(255, 19, 29, 39)),
+      ),
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text_info(cadena: 'Registro Cliente', opcion: 1),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20, left: 10, top: 15, bottom: 5),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        size: 25,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                ],
+              Text_info(
+                cadena: 'Datos del Cliente',
+                opcion: 0,
+                colores: Colors.white,
               ),
-              Text_info(cadena: 'Datos del Cliente', opcion: 0),
               SizedBox(height: 10),
               Padding(
                 padding: EdgeInsets.only(left: 25, right: 25),
                 child: TextField(
+                  cursorColor: Colors.white,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -70,6 +81,7 @@ class _Registro_clientes extends State<Registro_clientes> {
               Padding(
                 padding: EdgeInsets.only(left: 25, right: 25),
                 child: TextField(
+                  cursorColor: Colors.white,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -99,6 +111,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 30,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -120,6 +133,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 5,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -147,6 +161,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 30,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -168,6 +183,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 5,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -186,7 +202,10 @@ class _Registro_clientes extends State<Registro_clientes> {
                   ),
                 ],
               ),
-              Text_info(cadena: 'Datos del Vehiculo', opcion: 0),
+              Text_info(
+                  cadena: 'Datos del Vehiculo',
+                  opcion: 0,
+                  colores: Colors.white),
               SizedBox(height: 10),
               Row(
                 children: [
@@ -194,6 +213,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -213,6 +233,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -239,6 +260,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 4,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -260,6 +282,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 15,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -287,6 +310,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 10,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -308,6 +332,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 17,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -335,6 +360,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 10,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -356,6 +382,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        cursorColor: Colors.white,
                         //maxLength: 7,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -409,6 +436,8 @@ class _Registro_clientes extends State<Registro_clientes> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                        elevation: 3,
+                        shadowColor: Colors.white38,
                         padding:
                             EdgeInsets.symmetric(horizontal: 35, vertical: 10),
                         shape: RoundedRectangleBorder(
@@ -432,6 +461,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                          elevation: 5,
                           padding: EdgeInsets.symmetric(
                               horizontal: 35, vertical: 15),
                           shape: RoundedRectangleBorder(
@@ -450,6 +480,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                        elevation: 5,
                         padding:
                             EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                         shape: RoundedRectangleBorder(
@@ -472,31 +503,5 @@ class _Registro_clientes extends State<Registro_clientes> {
         ),
       ),
     );
-  }
-}
-
-class Text_info extends StatelessWidget {
-  final String cadena;
-  final int opcion;
-  const Text_info({super.key, required this.cadena, required this.opcion});
-
-  @override
-  Widget build(BuildContext context) {
-    return opcion == 0
-        ? Padding(
-            padding: EdgeInsets.only(left: 25, top: 20),
-            child: Text(
-              cadena,
-              style: TextStyle(
-                  color: Colors.white, fontSize: 20, letterSpacing: 2),
-            ),
-          )
-        : Padding(
-            padding: EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 20),
-            child: Text(
-              cadena,
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          );
   }
 }

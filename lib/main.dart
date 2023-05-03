@@ -1,9 +1,13 @@
 import 'package:aplicacion_mecanico/util/botton_add_icon.dart';
+import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
+import 'package:aplicacion_mecanico/vistas/Pantalla_historial.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
+import 'package:aplicacion_mecanico/vistas/Pantalla_servicio.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,8 +36,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: myColor, secondaryHeaderColor: Color(0xFFE6EFFF)),
-      home: //const Registro_citas(),
+        primarySwatch: myColor,
+        secondaryHeaderColor: Color(0xFFE6EFFF),
+      ),
+      home: // const Servicio_suspension(),
           const MyHomePage(),
     );
   }
@@ -47,89 +53,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int i = 0;
+  int index = 0;
   int aux = 0;
+  List<Widget> pagina = [
+    Pantalla_principal(),
+    Pantalla_citas(),
+    Pantalla_citas(),
+    Pantalla_clientes(),
+    Pantalla_historial()
+  ];
 
-  void mostrarBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Color(0xFFE6EFFF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-      ),
-      builder: (BuildContext context) {
-        return Container(
-          height: 350,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                padding: EdgeInsets.only(right: 15, top: 10, left: 15),
-                height: 40,
-                child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(Icons.close)),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Registro_clientes(),
-                    ),
-                  ).whenComplete(() => Navigator.pop(context));
-                },
-                child: BottonAddIcon(
-                    iconName: Icons.account_circle_rounded,
-                    textName: 'Crear Cliente'),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: BottonAddIcon(
-                    iconName: Icons.airport_shuttle_sharp,
-                    textName: 'Agregar Vehiculo'),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: BottonAddIcon(
-                    iconName: Icons.build_circle, textName: 'Agregar Servicio'),
-              )
-            ],
-          ),
-        );
-      },
-    );
+  void cambiarPagina(int value) {
+    setState(() {
+      aux = index;
+      index = value;
+      print(aux);
+      if (index == 2) {
+        Mostrar_BottomSheet().mostrarBottomSheet(context);
+        index = aux;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget? pagina;
-    switch (i) {
-      case 0:
-        pagina = Pantalla_principal();
-        break;
-      case 1:
-        pagina = Pantalla_citas();
-        break;
-      case 2:
-        break;
-      case 3:
-        pagina = Pantalla_clientes();
-        break;
-      case 4:
-        //pagina = Pantalla_historial();
-        break;
-    }
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
             systemNavigationBarColor: Color.fromARGB(255, 19, 29, 39)),
       ),
       backgroundColor: const Color(0xFF15202B),
@@ -137,9 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: pagina,
-              ),
+              child: pagina[index],
             ),
             Container(
               decoration: BoxDecoration(
@@ -153,17 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 unselectedFontSize: 10,
                 showUnselectedLabels: true,
                 iconSize: 32,
-                currentIndex: i,
+                currentIndex: index,
                 onTap: (value) {
-                  setState(() {
-                    aux = i;
-                    i = value;
-                    print(aux);
-                    if (i == 2) {
-                      mostrarBottomSheet();
-                      i = aux;
-                    }
-                  });
+                  cambiarPagina(value);
                 },
                 items: [
                   BottomNavigationBarItem(

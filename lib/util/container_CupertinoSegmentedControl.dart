@@ -15,11 +15,10 @@ class Container_CupertinoSegmentedControl extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: indexN == i ? Color(0xFf95A6DC) : Color(0xFF15202B),
-          ),
+              color: indexN == i ? Color(0xFf95A6DC) : Color(0xFF15202B),
+              width: indexN == i ? 3 : 0),
         ),
       ),
-      //color: Colors.black,
       child: Text(
         textN,
         style: TextStyle(

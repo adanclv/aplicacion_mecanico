@@ -74,8 +74,14 @@ class _Pantalla_principal extends State<Pantalla_principal> {
             SizedBox(
               height: 15,
             ),
-
-            Center(
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 1),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Colors.white38, width: 0.5),
+                ),
+              ),
               child: CupertinoSegmentedControl<int>(
                 unselectedColor: Color(0xFF15202B),
                 //selectedColor: Colors.white,
@@ -96,7 +102,6 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                 },
               ),
             ),
-//            Center(child: Chip(label: 'label'),),
             SizedBox(
               height: 20,
             ),

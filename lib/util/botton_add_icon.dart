@@ -11,7 +11,7 @@ class BottonAddIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFE6EFFF),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Container(
@@ -21,6 +21,7 @@ class BottonAddIcon extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Color.fromARGB(255, 200, 210, 227)),
             child: Icon(
+              color: Colors.black,
               iconName,
               size: 35,
             ),
@@ -31,7 +32,7 @@ class BottonAddIcon extends StatelessWidget {
           Container(
             child: Text(
               textName,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
           )
         ],
