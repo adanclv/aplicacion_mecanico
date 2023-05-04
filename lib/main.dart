@@ -1,13 +1,9 @@
-import 'package:aplicacion_mecanico/util/botton_add_icon.dart';
 import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
+import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_historial.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
-import 'package:aplicacion_mecanico/vistas/Pantalla_servicio.dart';
-import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
-import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
-import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,7 +35,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: myColor,
         secondaryHeaderColor: Color(0xFFE6EFFF),
       ),
-      home: // const Servicio_suspension(),
+      home: //const Condiciones_del_motor(),
           const MyHomePage(),
     );
   }

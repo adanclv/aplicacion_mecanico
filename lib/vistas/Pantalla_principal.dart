@@ -1,6 +1,7 @@
-import 'package:aplicacion_mecanico/util/container_CupertinoSegmentedControl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../util/container_CupertinoSegmentedControl.dart';
 
 class Pantalla_principal extends StatefulWidget {
   const Pantalla_principal({super.key});

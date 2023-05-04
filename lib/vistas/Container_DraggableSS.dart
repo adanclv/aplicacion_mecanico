@@ -1,12 +1,11 @@
+import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../util/container_CupertinoSegmentedControl.dart';
+import '../util/container_CupertinoSegmentedControl2.dart';
 
 class Container_DraggableSS extends StatefulWidget {
   final ScrollController scroll;
@@ -19,6 +18,12 @@ class Container_DraggableSS extends StatefulWidget {
 
 class _Container_DraggableSS extends State<Container_DraggableSS> {
   int indexCupertino = 0;
+  List<Widget> paginas = [
+    Servicio_suspension(),
+    Condiciones_del_motor(),
+    Condiciones_del_motor(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -50,16 +55,14 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
                   unselectedColor: Color(0xFF15202B),
                   //selectedColor: Colors.white,
                   children: {
-                    0: Container_CupertinoSegmentedControl(
+                    0: Container_CupertinoSegmentedControl2(
                         textN: 'Suspension', indexN: indexCupertino, i: 0),
-                    1: Container_CupertinoSegmentedControl(
-                        textN: 'Por rellenar', indexN: indexCupertino, i: 1),
-                    2: Container_CupertinoSegmentedControl(
+                    1: Container_CupertinoSegmentedControl2(
+                        textN: 'Condiciones del Motor',
+                        indexN: indexCupertino,
+                        i: 1),
+                    2: Container_CupertinoSegmentedControl2(
                         textN: 'En proceso', indexN: indexCupertino, i: 2),
-                    3: Container_CupertinoSegmentedControl(
-                        textN: 'Adan Clemente', indexN: indexCupertino, i: 3),
-                    4: Container_CupertinoSegmentedControl(
-                        textN: 'facil', indexN: indexCupertino, i: 4),
                   },
                   groupValue: indexCupertino,
                   onValueChanged: (value) {
@@ -71,10 +74,7 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
                 ),
               ),
             ),
-            Expanded(
-                child: indexCupertino == 0
-                    ? Servicio_suspension()
-                    : Registro_citas()),
+            Expanded(child: paginas[indexCupertino]),
           ],
         ),
       ),

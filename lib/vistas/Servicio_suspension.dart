@@ -7,11 +7,7 @@ class Servicio_suspension extends StatefulWidget {
   State<Servicio_suspension> createState() => _Servicio_suspension();
 }
 
-List<String> Lterminal_int = [
-  'cambio',
-  'mal',
-  'bien'
-]; //lista de las opciones que va a tener
+List<String> Lterminal_int = ['cambio', 'mal', 'bien'];
 List<String> Lterminal_ext = ['cambio', 'mal', 'bien'];
 List<String> Lrotula_inf = ['cambio', 'mal', 'bien'];
 List<String> Lrotula_sup = ['cambio', 'mal', 'bien'];
@@ -756,9 +752,7 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 backgroundColor: Color(0xFF95A6DC)),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                            onPressed: () {},
                             child: Text(
                               'Cancelar',
                               style: TextStyle(
