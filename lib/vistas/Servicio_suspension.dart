@@ -1,3 +1,4 @@
+import 'package:aplicacion_mecanico/util/text_Info.dart';
 import 'package:flutter/material.dart';
 
 class Servicio_suspension extends StatefulWidget {
@@ -174,7 +175,7 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                     Text('Mal', style: TextStyle(color: Colors.white)),
                     SizedBox(width: 20),
                     Text('Bien', style: TextStyle(color: Colors.white)),
-                    SizedBox(width: 20),
+                    SizedBox(width: 10),
                   ],
                 ),
                 Container(
@@ -195,32 +196,42 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                         ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Terminal Interior'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: Lterminal_int[0],
-                            groupValue: opcIzq01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: Lterminal_int[0],
+                                  groupValue: opcIzq01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: Lterminal_int[1],
+                                  groupValue: opcIzq01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: Lterminal_int[2],
+                                  groupValue: opcIzq01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: Lterminal_int[1],
-                            groupValue: opcIzq01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: Lterminal_int[2],
-                            groupValue: opcIzq01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
-                          )
                         ],
                       ),
                       Row(

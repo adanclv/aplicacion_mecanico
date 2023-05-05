@@ -1,5 +1,9 @@
+import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
+import 'package:aplicacion_mecanico/util/container_Tasks.dart';
+import 'package:aplicacion_mecanico/vistas/Pantalla_servicio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../util/container_CupertinoSegmentedControl.dart';
 
@@ -15,6 +19,11 @@ class _Pantalla_principal extends State<Pantalla_principal> {
   int horaActual = DateTime.now().hour;
   String mensaje = '';
 
+  List<String> prod = ['holas', 'holads', 'perros'];
+
+  var box = Hive.box('pendientesBox').values.toList();
+  Crear_cliente newCliente = Crear_cliente();
+
   String buenosDTN() {
     if (horaActual > 5 && horaActual <= 11) {
       mensaje = 'Buenos Dias';
@@ -24,6 +33,12 @@ class _Pantalla_principal extends State<Pantalla_principal> {
       mensaje = 'Buenas Noches';
     }
     return mensaje;
+  }
+
+  void actualizar() {
+    setState(() {
+      box = Hive.box('pendientesBox').values.toList();
+    });
   }
 
   @override
@@ -106,24 +121,62 @@ class _Pantalla_principal extends State<Pantalla_principal> {
             SizedBox(
               height: 20,
             ),
-            Expanded(
-                child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.assignment_outlined,
-                      color: Colors.white38, size: 150),
-                  Text(
-                    'Sin Pendientes',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+            newCliente.existeTasks() == false
+                ? Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.assignment_outlined,
+                                color: Colors.white38, size: 150),
+                            Text(
+                              'Sin Pendientes',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                            Text(
+                              'Presiona agregar para realizar servicio',
+                              style: TextStyle(color: Colors.white38),
+                            ),
+                            SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : Expanded(
+                    child: ListView(
+                      children: box
+                          .map((e) => ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    padding: EdgeInsets.only(
+                                        left: 15,
+                                        right: 15,
+                                        bottom: 5,
+                                        top: 5)),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Pantalla_servicio(),
+                                    ),
+                                  );
+                                },
+                                child: Container_tasks(
+                                    noOrden: e.noOrden,
+                                    servicio:
+                                        newCliente.list_servicios(e.nombre),
+                                    nombre: e.nombre,
+                                    telefono: e.telefono,
+                                    vehiculo:
+                                        '${e.marca} ${e.modelo} ${e.year}',
+                                    placas: e.placas),
+                              ))
+                          .toList(),
+                    ),
                   ),
-                  Text(
-                    'Presiona agregar para realizar servicio',
-                    style: TextStyle(color: Colors.white38),
-                  ),
-                ],
-              ),
-            )),
           ],
         ),
       ),

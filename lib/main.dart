@@ -1,13 +1,31 @@
+import 'package:aplicacion_mecanico/modelo/Clientes.dart';
+import 'package:aplicacion_mecanico/modelo/Pendientes.dart';
+import 'package:aplicacion_mecanico/modelo/Vehiculos.dart';
 import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
-import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_historial.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(ClienteAdapter());
+  Hive.registerAdapter(VehiculoAdapter());
+  Hive.registerAdapter(PendientesAdapter());
+
+  var box1 = await Hive.openBox('clientesBox');
+  var box2 = await Hive.openBox('vehiculosBox');
+  var box3 = await Hive.openBox('pendientesBox');
+
+  // box1.clear();
+  // box2.clear();
+  // box3.clear();
+
   runApp(const MainApp());
 }
 
@@ -54,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pagina = [
     Pantalla_principal(),
     Pantalla_citas(),
-    Pantalla_citas(),
+    Pantalla_principal(),
     Pantalla_clientes(),
     Pantalla_historial()
   ];
