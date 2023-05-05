@@ -1,6 +1,7 @@
 import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_afinacion.dart';
 import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
   int indexCupertino = 0;
   List<Widget> paginas = [
     Servicio_suspension(),
+    Servicio_afinacion(),
     Condiciones_del_motor(),
     Condiciones_del_motor(),
   ];
@@ -49,7 +51,6 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
                     topRight: Radius.circular(40),
                   ),
                 ),
-                alignment: Alignment.topLeft,
                 padding: EdgeInsets.only(top: 10, bottom: 1),
                 child: CupertinoSegmentedControl<int>(
                   unselectedColor: Color(0xFF15202B),
@@ -58,11 +59,15 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
                     0: Container_CupertinoSegmentedControl2(
                         textN: 'Suspension', indexN: indexCupertino, i: 0),
                     1: Container_CupertinoSegmentedControl2(
+                        textN: 'Afinacion', indexN: indexCupertino, i: 1),
+                    2: Container_CupertinoSegmentedControl2(
                         textN: 'Condiciones del Motor',
                         indexN: indexCupertino,
-                        i: 1),
-                    2: Container_CupertinoSegmentedControl2(
-                        textN: 'En proceso', indexN: indexCupertino, i: 2),
+                        i: 2),
+                    3: Container_CupertinoSegmentedControl2(
+                        textN: 'Condiciones del Motor',
+                        indexN: indexCupertino,
+                        i: 3),
                   },
                   groupValue: indexCupertino,
                   onValueChanged: (value) {
