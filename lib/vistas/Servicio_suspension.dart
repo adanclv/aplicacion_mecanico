@@ -168,7 +168,7 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                   children: [
                     Text('Cambio', style: TextStyle(color: Colors.white)),
                     SizedBox(width: 20),
-                    Text('Mal', style: TextStyle(color: Colors.white)),
+                    Text('f/s   ', style: TextStyle(color: Colors.white)),
                     SizedBox(width: 20),
                     Text('Bien', style: TextStyle(color: Colors.white)),
                     SizedBox(width: 10),
@@ -948,7 +948,6 @@ class Texto_parte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 230,
       padding: EdgeInsets.only(left: 15),
       child: Text(
         texto,
