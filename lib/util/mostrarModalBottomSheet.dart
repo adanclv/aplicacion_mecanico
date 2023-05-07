@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
-import '../vistas/Pantalla_servicio.dart';
 import '../vistas/Registro_clientes.dart';
 import 'botton_add_icon.dart';
 
@@ -41,7 +37,7 @@ class Mostrar_BottomSheet extends StatefulWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Registro_clientes(),
+                      builder: (context) => Registro_clientes(opcion: 1),
                     ),
                   ).whenComplete(() => Navigator.pop(context));
                 },
@@ -62,14 +58,7 @@ class Mostrar_BottomSheet extends StatefulWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE6EFFF), elevation: 0),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Pantalla_servicio(),
-                    ),
-                  ).whenComplete(() => Navigator.pop(context));
-                },
+                onPressed: () {},
                 child: BottonAddIcon(
                     iconName: Icons.build_circle, textName: 'Agregar Servicio'),
               ),

@@ -5,7 +5,22 @@ import '../util/text_Info.dart';
 import 'Container_DraggableSS.dart';
 
 class Pantalla_servicio extends StatefulWidget {
-  const Pantalla_servicio({super.key});
+  final String noOrden;
+  final String nombre;
+  final String telefono;
+  final String vehiculo;
+  final String placas;
+  final String vin;
+  final String color;
+  Pantalla_servicio(
+      {super.key,
+      required this.noOrden,
+      required this.nombre,
+      required this.telefono,
+      required this.vehiculo,
+      required this.placas,
+      required this.vin,
+      required this.color});
 
   @override
   State<Pantalla_servicio> createState() => _Pantalla_servicio();
@@ -30,7 +45,10 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
           ),
         ),
         shape: Border(bottom: BorderSide(color: Colors.white38, width: 0.2)),
-        title: Text_info(cadena: 'No. 00000', opcion: 1, colores: Colors.black),
+        title: Text(
+          'No. ${widget.noOrden}',
+          style: TextStyle(color: Colors.black, fontSize: 29),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 10, top: 20, bottom: 20),
@@ -67,24 +85,24 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
               top: 30,
               left: 25,
               child: Text(
-                'Adán Clemente',
+                widget.nombre,
                 style: TextStyle(fontSize: 20),
               ),
             ),
             Positioned(
               top: 30,
               right: 25,
-              child: Text(
-                '833-444-13-72',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Positioned(
-              top: 50,
-              right: 65,
-              child: Text(
-                'Telefono',
-                style: TextStyle(fontSize: 12),
+              child: Column(
+                children: [
+                  Text(
+                    widget.telefono,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    'Telefono',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
               ),
             ),
             Positioned(
@@ -99,59 +117,58 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
               top: 80,
               left: 25,
               child: Text(
-                'Honda Civic 1972',
+                widget.vehiculo,
                 style: TextStyle(fontSize: 20),
               ),
             ),
             Positioned(
               top: 80,
               right: 25,
-              child: Text(
-                '0000-000',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Positioned(
-              top: 100,
-              right: 45,
-              child: Text(
-                'Placas',
-                style: TextStyle(fontSize: 12),
+              child: Column(
+                children: [
+                  Text(
+                    widget.placas,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    'Placas',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
               ),
             ),
             Positioned(
               top: 120,
               left: 25,
-              child: Text(
-                '00000000000000000',
-                style: TextStyle(fontSize: 20),
+              child: Column(
+                children: [
+                  Text(
+                    widget.vin,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    'VIN',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
               ),
             ),
             Positioned(
-              top: 120,
-              right: 25,
-              child: Text(
-                'Rojo',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Positioned(
-              top: 140,
-              left: 95,
-              child: Text(
-                'VIN',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-            Positioned(
-              top: 140,
-              right: 30,
-              child: Text(
-                'Color',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-            MyWidget(),
+                top: 120,
+                right: 30,
+                child: Column(
+                  children: [
+                    Text(
+                      widget.color,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      'Color',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                )),
+            MyWidget(nombre: widget.nombre),
           ],
         ),
       ),
@@ -160,6 +177,9 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
 }
 
 class MyWidget extends StatelessWidget {
+  final String nombre;
+
+  const MyWidget({super.key, required this.nombre});
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -169,6 +189,7 @@ class MyWidget extends StatelessWidget {
       builder: (context, scrollController) {
         return Container_DraggableSS(
           scroll: scrollController,
+          nombre: nombre,
         );
       },
     );

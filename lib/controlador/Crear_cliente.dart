@@ -1,7 +1,16 @@
 import 'package:aplicacion_mecanico/modelo/Clientes.dart';
 import 'package:aplicacion_mecanico/modelo/Pendientes.dart';
 import 'package:aplicacion_mecanico/modelo/Vehiculos.dart';
+import 'package:aplicacion_mecanico/vistas/Condicion_sistema_enfriamiento.dart';
+import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_afinacion.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_dir_hidraulica.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_frenos.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
+import '../util/container_CupertinoSegmentedControl2.dart';
 
 class Crear_cliente {
   void addCliente(String nombre, String telefono, String calle, String numero,
@@ -99,6 +108,72 @@ class Crear_cliente {
     return lista_servicios;
   }
 
+  Map<int, Widget> mapa_servicios(List<String> lista, int index) {
+    Map<int, Widget> servicios = {};
+
+    for (int i = 0; i < lista.length; i++) {
+      if (lista[i] == 'Afinacion') {
+        servicios[i] = Container_CupertinoSegmentedControl2(
+            textN: 'Afinacion', indexN: index, i: i);
+      } else if (lista[i] == 'Frenos') {
+        servicios[i] = Container_CupertinoSegmentedControl2(
+            textN: 'Frenos', indexN: index, i: i);
+      } else if (lista[i] == 'Suspension') {
+        servicios[i] = Container_CupertinoSegmentedControl2(
+            textN: 'Suspension', indexN: index, i: i);
+      } else if (lista[i] == 'Direccion Hidraulica') {
+        servicios[i] = Container_CupertinoSegmentedControl2(
+            textN: 'Direccion Hidraulica', indexN: index, i: i);
+      }
+    }
+    servicios[servicios.length] = Container_CupertinoSegmentedControl2(
+        textN: 'Condicion del Motor', indexN: index, i: servicios.length);
+    servicios[servicios.length] = Container_CupertinoSegmentedControl2(
+        textN: 'Condicion de Enfriamiento', indexN: index, i: servicios.length);
+    return servicios;
+  }
+
+  List<Widget> list_paginas(List<String> lista) {
+    List<Widget> lista_servicios = [];
+
+    for (int i = 0; i < lista.length; i++) {
+      if (lista[i] == 'Afinacion') {
+        lista_servicios.add(Servicio_afinacion());
+      } else if (lista[i] == 'Frenos') {
+        lista_servicios.add(Servicio_frenos());
+      } else if (lista[i] == 'Suspension') {
+        lista_servicios.add(Servicio_suspension());
+      } else if (lista[i] == 'Direccion Hidraulica') {
+        lista_servicios.add(Servicio_dir_hidraulica());
+      }
+    }
+    lista_servicios.add(Condiciones_del_motor());
+    lista_servicios.add(Condicion_sistema_enfriamiento());
+    return lista_servicios;
+  }
+
+  Vehiculo info(String nombre, String placas) {
+    var box = Hive.box('vehiculosBox');
+    Vehiculo carro = Vehiculo(
+        marca: '',
+        modelo: '',
+        year: '',
+        motor: '',
+        color: '',
+        vin: '',
+        kms: '',
+        placas: '',
+        nombre: '');
+
+    for (Vehiculo c in box.values) {
+      if (c.nombre == nombre && c.placas == placas) {
+        carro = c;
+        break;
+      }
+    }
+    return carro;
+  }
+
   void showClientes() {
     var box = Hive.box('clientesBox');
     print(box.values.toString());
@@ -116,6 +191,12 @@ class Crear_cliente {
 
   bool existeTasks() {
     var box = Hive.box('pendientesBox');
+    bool vacio = box.values.isNotEmpty;
+    return vacio;
+  }
+
+  bool existeClientes() {
+    var box = Hive.box('clientesBox');
     bool vacio = box.values.isNotEmpty;
     return vacio;
   }

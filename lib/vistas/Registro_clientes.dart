@@ -1,4 +1,5 @@
 import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
+import 'package:aplicacion_mecanico/util/mostrar_Dialog.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/services.dart';
 import '../util/text_Info.dart';
 
 class Registro_clientes extends StatefulWidget {
-  const Registro_clientes({super.key});
+  final int opcion;
+  const Registro_clientes({super.key, required this.opcion});
 
   @override
   State<Registro_clientes> createState() => _Registro_clientes();
@@ -24,11 +26,6 @@ class _Registro_clientes extends State<Registro_clientes> {
   List<bool> _seleccionados = [false, false, false, false];
   List<int> _servicio = [0, 0, 0, 0];
   // [afinacion, hidraulica, frenos, suspension]
-
-  int Safinacion = 0;
-  int Sfrenos = 0;
-  int Shidraulica = 0;
-  int Ssupension = 0;
 
   final TextEditingController nombreController = TextEditingController();
   final TextEditingController telefonoController = TextEditingController();
@@ -59,6 +56,15 @@ class _Registro_clientes extends State<Registro_clientes> {
         });
       }
     }
+  }
+
+  void search(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Mostrar_dialog(nombre: nombreController.text);
+      },
+    );
   }
 
   @override
@@ -99,23 +105,46 @@ class _Registro_clientes extends State<Registro_clientes> {
                 colores: Colors.white,
               ),
               SizedBox(height: 10),
-              Padding(
-                padding: EdgeInsets.only(left: 25, right: 25),
-                child: TextField(
-                  controller: nombreController,
-                  cursorColor: Colors.white,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white)),
-                    hintText: 'Nombre',
-                    hintStyle: TextStyle(color: Colors.white38),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white)),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 25, right: widget.opcion == 1 ? 25 : 5),
+                      child: TextField(
+                        controller: nombreController,
+                        cursorColor: Colors.white,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.white)),
+                          hintText: 'Nombre',
+                          hintStyle: TextStyle(color: Colors.white38),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.white)),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  widget.opcion == 2 || widget.opcion == 3
+                      //es por si desea agregar un vehiculo o servicio
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 15),
+                          child: IconButton(
+                            onPressed: () {
+                              search(context);
+                            },
+                            icon: Icon(
+                              Icons.search_rounded,
+                              size: 35,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
+                ],
               ),
               SizedBox(height: 10),
               Padding(

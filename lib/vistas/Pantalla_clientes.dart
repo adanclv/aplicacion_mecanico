@@ -1,5 +1,8 @@
+import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
+import 'package:aplicacion_mecanico/util/container_Clientes.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_clientes.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class Pantalla_clientes extends StatefulWidget {
   const Pantalla_clientes({super.key});
@@ -9,6 +12,9 @@ class Pantalla_clientes extends StatefulWidget {
 }
 
 class _Pantalla_clientes extends State<Pantalla_clientes> {
+  var box = Hive.box('clientesBox').values.toList();
+  Crear_cliente newCliente = Crear_cliente();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,7 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30),
+              padding: const EdgeInsets.only(left: 25, right: 25),
               child: TextField(
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -50,28 +56,49 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
                 ),
               ),
             ),
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.people_outline_outlined,
-                      color: Colors.white38,
-                      size: 150,
+            SizedBox(height: 20),
+            newCliente.existeClientes == false
+                ? Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.people_outline_outlined,
+                            color: Colors.white38,
+                            size: 150,
+                          ),
+                          Text(
+                            'No hay clientes',
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
+                          Text(
+                            'Presiona el boton para crear cliente',
+                            style: TextStyle(color: Colors.white38),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      'No hay clientes',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                  )
+                : Expanded(
+                    child: ListView(
+                      children: box
+                          .map(
+                            (e) => ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  padding: EdgeInsets.only(
+                                      left: 25, right: 25, bottom: 5, top: 5)),
+                              onPressed: () {},
+                              child: Container_clientes(
+                                  nombre: e.nombre,
+                                  telefono: e.telefono,
+                                  Lservicio: 'Lservicio'),
+                            ),
+                          )
+                          .toList(),
                     ),
-                    Text(
-                      'Presiona el boton para crear cliente',
-                      style: TextStyle(color: Colors.white38),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
             Padding(
               padding: EdgeInsets.only(right: 20, bottom: 20),
               child: FloatingActionButton(
@@ -81,7 +108,9 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Registro_clientes(),
+                      builder: (context) => Registro_clientes(
+                        opcion: 2,
+                      ),
                     ),
                   );
                 },

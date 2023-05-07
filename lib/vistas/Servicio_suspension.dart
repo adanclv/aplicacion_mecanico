@@ -311,7 +311,7 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Texto_parte(texto: 'Rotula Exterior'),
+                          Texto_parte(texto: 'Rotula Superior'),
                           Container(
                             child: Row(
                               children: [

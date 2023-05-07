@@ -54,6 +54,7 @@ class Container_tasks extends StatelessWidget {
               width: 200,
               height: tamano(),
               child: ListView(
+                physics: NeverScrollableScrollPhysics(),
                 children: servicio
                     .map(
                       (e) => Container(

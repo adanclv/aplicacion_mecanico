@@ -160,7 +160,19 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Pantalla_servicio(),
+                                      builder: (context) => Pantalla_servicio(
+                                          noOrden: e.noOrden,
+                                          nombre: e.nombre,
+                                          telefono: e.telefono,
+                                          vehiculo:
+                                              '${e.marca} ${e.modelo} ${e.year}',
+                                          placas: e.placas,
+                                          vin: newCliente
+                                              .info(e.nombre, e.placas)
+                                              .vin,
+                                          color: newCliente
+                                              .info(e.nombre, e.placas)
+                                              .color),
                                     ),
                                   );
                                 },
