@@ -579,6 +579,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Carbcln'),
                           Container(
@@ -618,6 +619,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Cables'),
                           Container(
@@ -657,6 +659,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Tapa'),
                           Container(
@@ -696,6 +699,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'PCV'),
                           Container(
@@ -735,6 +739,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Rotor'),
                           Container(
@@ -774,6 +779,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Liq. Inj'),
                           Container(
@@ -834,6 +840,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Anticongelante'),
                           Container(
@@ -873,8 +880,9 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Texto_parte(texto: 'Aceite Dr. Hidraulica'),
+                          Texto_parte(texto: 'Aceite Direccion Hidraulica'),
                           Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -912,6 +920,7 @@ class _Servicio_afinacion extends State<Servicio_afinacion> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Aceite Transmision Automatica'),
                           Container(
@@ -1023,7 +1032,6 @@ class Texto_parte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 230,
       padding: EdgeInsets.only(left: 15),
       child: Text(
         texto,

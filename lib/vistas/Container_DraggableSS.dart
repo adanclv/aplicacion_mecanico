@@ -2,6 +2,7 @@ import 'package:aplicacion_mecanico/vistas/Condicion_sistema_enfriamiento.dart';
 import 'package:aplicacion_mecanico/vistas/Condiciones_del_motor.dart';
 import 'package:aplicacion_mecanico/vistas/Servicio_afinacion.dart';
 import 'package:aplicacion_mecanico/vistas/Servicio_dir_hidraulica.dart';
+import 'package:aplicacion_mecanico/vistas/Servicio_frenos.dart';
 import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
     Servicio_suspension(),
     Servicio_afinacion(),
     Servicio_dir_hidraulica(),
+    Servicio_frenos(),
     Condiciones_del_motor(),
     Condicion_sistema_enfriamiento(),
   ];
@@ -65,13 +67,15 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
                         indexN: indexCupertino,
                         i: 2),
                     3: Container_CupertinoSegmentedControl2(
-                        textN: 'Condiciones del Motor',
-                        indexN: indexCupertino,
-                        i: 3),
+                        textN: 'Frenos', indexN: indexCupertino, i: 3),
                     4: Container_CupertinoSegmentedControl2(
-                        textN: 'Condicion Enfriamiento',
+                        textN: 'Condicion del Motor',
                         indexN: indexCupertino,
                         i: 4),
+                    5: Container_CupertinoSegmentedControl2(
+                        textN: 'Condicion Enfriamiento',
+                        indexN: indexCupertino,
+                        i: 5),
                   },
                   groupValue: indexCupertino,
                   onValueChanged: (value) {

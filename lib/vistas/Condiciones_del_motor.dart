@@ -201,40 +201,62 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                     children: [
                       Texto_parte(texto: 'Banda Alternador'),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Tostada',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: banda_alternador[0],
-                            groupValue: opcion01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Tostada',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: banda_alternador[0],
+                                  groupValue: opcion01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Text('Rota',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: banda_alternador[1],
-                            groupValue: opcion01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Rota',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: banda_alternador[1],
+                                  groupValue: opcion01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Text('Chilla',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: banda_alternador[2],
-                            groupValue: opcion01,
-                            onChanged: (value) {
-                              group01(value);
-                            },
-                          )
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Chilla',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: banda_alternador[2],
+                                  groupValue: opcion01,
+                                  onChanged: (value) {
+                                    group01(value);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -242,68 +264,88 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                         children: [
                           Text('Cambio', style: TextStyle(color: Colors.white)),
                           SizedBox(width: 20),
-                          Text('f/s', style: TextStyle(color: Colors.white)),
+                          Text('f/s   ', style: TextStyle(color: Colors.white)),
                           SizedBox(width: 20),
                           Text('Bien', style: TextStyle(color: Colors.white)),
-                          SizedBox(width: 20),
+                          SizedBox(width: 10),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Polea Tensora'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_tensora[0],
-                            groupValue: opcion02,
-                            onChanged: (value) {
-                              group02(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_tensora[0],
+                                  groupValue: opcion02,
+                                  onChanged: (value) {
+                                    group02(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_tensora[1],
+                                  groupValue: opcion02,
+                                  onChanged: (value) {
+                                    group02(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_tensora[2],
+                                  groupValue: opcion02,
+                                  onChanged: (value) {
+                                    group02(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_tensora[1],
-                            groupValue: opcion02,
-                            onChanged: (value) {
-                              group02(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_tensora[2],
-                            groupValue: opcion02,
-                            onChanged: (value) {
-                              group02(value);
-                            },
-                          )
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Polea Loca'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_loca[0],
-                            groupValue: opcion03,
-                            onChanged: (value) {
-                              group03(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_loca[0],
+                                  groupValue: opcion03,
+                                  onChanged: (value) {
+                                    group03(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_loca[1],
+                                  groupValue: opcion03,
+                                  onChanged: (value) {
+                                    group03(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: polea_loca[2],
+                                  groupValue: opcion03,
+                                  onChanged: (value) {
+                                    group03(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_loca[1],
-                            groupValue: opcion03,
-                            onChanged: (value) {
-                              group03(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: polea_loca[2],
-                            groupValue: opcion03,
-                            onChanged: (value) {
-                              group03(value);
-                            },
-                          )
                         ],
                       ),
                     ],
@@ -319,28 +361,43 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                     children: [
                       Texto_parte(texto: 'Bomba de Agua'),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Gotea',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: bomba_agua[0],
-                            groupValue: opcion04,
-                            onChanged: (value) {
-                              group04(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Gotea',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: bomba_agua[0],
+                                  groupValue: opcion04,
+                                  onChanged: (value) {
+                                    group04(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Text('Chilla',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: bomba_agua[1],
-                            groupValue: opcion04,
-                            onChanged: (value) {
-                              group04(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Chilla',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: bomba_agua[1],
+                                  groupValue: opcion04,
+                                  onChanged: (value) {
+                                    group04(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -349,39 +406,49 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                         children: [
                           Text('Cambio', style: TextStyle(color: Colors.white)),
                           SizedBox(width: 20),
-                          Text('f/s', style: TextStyle(color: Colors.white)),
+                          Text('f/s   ', style: TextStyle(color: Colors.white)),
                           SizedBox(width: 20),
                           Text('Bien', style: TextStyle(color: Colors.white)),
-                          SizedBox(width: 20),
+                          SizedBox(width: 10),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Fan Clutch'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: fan_clutch[0],
-                            groupValue: opcion05,
-                            onChanged: (value) {
-                              group05(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: fan_clutch[0],
+                                  groupValue: opcion05,
+                                  onChanged: (value) {
+                                    group05(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: fan_clutch[1],
+                                  groupValue: opcion05,
+                                  onChanged: (value) {
+                                    group05(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: fan_clutch[2],
+                                  groupValue: opcion05,
+                                  onChanged: (value) {
+                                    group05(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: fan_clutch[1],
-                            groupValue: opcion05,
-                            onChanged: (value) {
-                              group05(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: fan_clutch[2],
-                            groupValue: opcion05,
-                            onChanged: (value) {
-                              group05(value);
-                            },
-                          )
                         ],
                       ),
                     ],
@@ -397,39 +464,61 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                     children: [
                       Texto_parte(texto: 'Presion bomba de aceite'),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Alta',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: bomba_aceite[0],
-                            groupValue: opcion06,
-                            onChanged: (value) {
-                              group06(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Alta',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: bomba_aceite[0],
+                                  groupValue: opcion06,
+                                  onChanged: (value) {
+                                    group06(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Text('Normal',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: bomba_aceite[1],
-                            groupValue: opcion06,
-                            onChanged: (value) {
-                              group06(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Normal',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: bomba_aceite[1],
+                                  groupValue: opcion06,
+                                  onChanged: (value) {
+                                    group06(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Text('Baja',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: bomba_aceite[2],
-                            groupValue: opcion06,
-                            onChanged: (value) {
-                              group06(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Text('Baja',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: bomba_aceite[2],
+                                  groupValue: opcion06,
+                                  onChanged: (value) {
+                                    group06(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -439,69 +528,96 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                           Text('Si', style: TextStyle(color: Colors.white)),
                           SizedBox(width: 35),
                           Text('No', style: TextStyle(color: Colors.white)),
-                          SizedBox(width: 70),
+                          SizedBox(width: 15),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Tapa de Punterias'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: tapa_punterias[0],
-                            groupValue: opcion07,
-                            onChanged: (value) {
-                              group07(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: tapa_punterias[1],
-                            groupValue: opcion07,
-                            onChanged: (value) {
-                              group07(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: tapa_punterias[0],
+                                  groupValue: opcion07,
+                                  onChanged: (value) {
+                                    group07(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: tapa_punterias[1],
+                                  groupValue: opcion07,
+                                  onChanged: (value) {
+                                    group07(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Tapa del Carter'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: tapa_carter[0],
-                            groupValue: opcion08,
-                            onChanged: (value) {
-                              group08(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: tapa_carter[1],
-                            groupValue: opcion08,
-                            onChanged: (value) {
-                              group08(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: tapa_carter[0],
+                                  groupValue: opcion08,
+                                  onChanged: (value) {
+                                    group08(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: tapa_carter[1],
+                                  groupValue: opcion08,
+                                  onChanged: (value) {
+                                    group08(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Registros de Monoblock'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: registro_monoblock[0],
-                            groupValue: opcion09,
-                            onChanged: (value) {
-                              group09(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: registro_monoblock[1],
-                            groupValue: opcion09,
-                            onChanged: (value) {
-                              group09(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: registro_monoblock[0],
+                                  groupValue: opcion09,
+                                  onChanged: (value) {
+                                    group09(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: registro_monoblock[1],
+                                  groupValue: opcion09,
+                                  onChanged: (value) {
+                                    group09(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -509,27 +625,36 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text('Suena', style: TextStyle(color: Colors.white)),
-                          SizedBox(width: 85),
+                          SizedBox(width: 30),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Texto_parte(texto: 'Cadena de Tiempo'),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: cadena_tiempo[0],
-                            groupValue: opcion10,
-                            onChanged: (value) {
-                              group10(value);
-                            },
-                          ),
-                          Radio(
-                            fillColor: MaterialStatePropertyAll(Colors.white),
-                            value: cadena_tiempo[1],
-                            groupValue: opcion10,
-                            onChanged: (value) {
-                              group10(value);
-                            },
+                          Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: cadena_tiempo[0],
+                                  groupValue: opcion10,
+                                  onChanged: (value) {
+                                    group10(value);
+                                  },
+                                ),
+                                Radio(
+                                  fillColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  value: cadena_tiempo[1],
+                                  groupValue: opcion10,
+                                  onChanged: (value) {
+                                    group10(value);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -545,6 +670,7 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Texto_parte(texto: 'Reten del Cigueñal'),
+                      SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -767,6 +893,7 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Texto_parte(texto: 'Reten Arbol de Levas'),
+                      SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -981,7 +1108,7 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: TextField(
                     maxLines: 10,
                     minLines: 6,
@@ -1050,7 +1177,6 @@ class Texto_parte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 230,
       padding: EdgeInsets.only(left: 15, top: 5),
       child: Text(
         texto,
