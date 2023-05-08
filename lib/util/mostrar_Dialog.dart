@@ -18,7 +18,7 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    a();
+    Ccontains();
   }
 
   void _seleccionado(value) {
@@ -27,7 +27,7 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
     });
   }
 
-  void a() {
+  void Ccontains() {
     var box = Hive.box('clientesBox');
 
     for (Cliente clientes in box.values) {
@@ -89,7 +89,7 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(elevation: 0),
               onPressed: () {
-                a();
+                Ccontains();
                 print(clientesN.toString());
               },
               child: Text(

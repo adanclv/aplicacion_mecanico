@@ -19,9 +19,15 @@ DateTime now = DateTime.now();
 
 class _Registro_clientes extends State<Registro_clientes> {
   Crear_cliente newCliente = Crear_cliente();
+  String? fecha;
 
-  String fecha =
-      '${now.day.toString().padLeft(2, '0')}${now.month.toString().padLeft(2, '0')}${now.year}-${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}';
+  @override
+  void initState() {
+    super.initState();
+    now = DateTime.now();
+    fecha =
+        '${now.day.toString().padLeft(2, '0')}${now.month.toString().padLeft(2, '0')}${now.year}-${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}';
+  }
 
   List<bool> _seleccionados = [false, false, false, false];
   List<int> _servicio = [0, 0, 0, 0];
@@ -597,7 +603,7 @@ class _Registro_clientes extends State<Registro_clientes> {
                             placasController.text,
                             nombreController.text);
                         newCliente.addTask(
-                            fecha,
+                            fecha!,
                             nombreController.text,
                             telefonoController.text,
                             marcaController.text,

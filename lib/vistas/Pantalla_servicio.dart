@@ -168,7 +168,7 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
                     ),
                   ],
                 )),
-            MyWidget(nombre: widget.nombre),
+            MyWidget(nombre: widget.nombre, noOrden: widget.noOrden),
           ],
         ),
       ),
@@ -178,8 +178,9 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
 
 class MyWidget extends StatelessWidget {
   final String nombre;
+  final String noOrden;
 
-  const MyWidget({super.key, required this.nombre});
+  const MyWidget({super.key, required this.nombre, required this.noOrden});
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -190,6 +191,7 @@ class MyWidget extends StatelessWidget {
         return Container_DraggableSS(
           scroll: scrollController,
           nombre: nombre,
+          noOrden: noOrden,
         );
       },
     );

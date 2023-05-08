@@ -1,8 +1,9 @@
-import 'package:aplicacion_mecanico/util/text_Info.dart';
+import 'package:aplicacion_mecanico/controlador/Save_servicio.dart';
 import 'package:flutter/material.dart';
 
 class Servicio_suspension extends StatefulWidget {
-  const Servicio_suspension({super.key});
+  final String noOrden;
+  const Servicio_suspension({super.key, required this.noOrden});
 
   @override
   State<Servicio_suspension> createState() => _Servicio_suspension();
@@ -30,6 +31,11 @@ List<String> Bgomas_amort = ['cambio', 'mal', 'bien'];
 List<String> Bbujes = ['cambio', 'mal', 'bien'];
 
 class _Servicio_suspension extends State<Servicio_suspension> {
+  Save_servicio ss = Save_servicio();
+  TextEditingController obserController = TextEditingController();
+  List<String> rSeleccionado = [];
+  bool wDisabled = false;
+
   String? opcIzq01;
   String? opcIzq02;
   String? opcIzq03;
@@ -51,106 +57,183 @@ class _Servicio_suspension extends State<Servicio_suspension> {
   String? opcTras16;
   String? opcTras17;
 
+  @override
+  void initState() {
+    super.initState();
+    if (ss.existeSuspension(widget.noOrden)) {
+      wDisabled = true;
+      rSeleccionado = ss.infoSuspension(widget.noOrden);
+      llenado();
+    }
+  }
+
   void group01(values) {
     setState(() {
-      opcIzq01 = values.toString();
+      if (wDisabled == false) {
+        opcIzq01 = values.toString();
+      } else {}
     });
   }
 
   void group02(values) {
     setState(() {
-      opcIzq02 = values.toString();
+      if (wDisabled == false) {
+        opcIzq02 = values.toString();
+      } else {}
     });
   }
 
   void group03(values) {
     setState(() {
-      opcIzq03 = values.toString();
+      if (wDisabled == false) {
+        opcIzq03 = values.toString();
+      } else {}
     });
   }
 
   void group04(values) {
     setState(() {
-      opcIzq04 = values.toString();
+      if (wDisabled == false) {
+        opcIzq04 = values.toString();
+      } else {}
     });
   }
 
   void group05(values) {
     setState(() {
-      opcIzq05 = values.toString();
+      if (wDisabled == false) {
+        opcIzq05 = values.toString();
+      } else {}
     });
   }
 
   void group06(values) {
     setState(() {
-      opcIzq06 = values.toString();
+      if (wDisabled == false) {
+        opcIzq06 = values.toString();
+      } else {}
     });
   }
 
   void group07(values) {
     setState(() {
-      opcIzq07 = values.toString();
+      if (wDisabled == false) {
+        opcIzq07 = values.toString();
+      } else {}
     });
   }
 
   void group08(values) {
     setState(() {
-      opcIzq08 = values.toString();
+      if (wDisabled == false) {
+        opcIzq08 = values.toString();
+      } else {}
     });
   }
 
   void group09(values) {
     setState(() {
-      opcIzq09 = values.toString();
+      if (wDisabled == false) {
+        opcIzq09 = values.toString();
+      } else {}
     });
   }
 
   void group10(values) {
     setState(() {
-      opcDer10 = values.toString();
+      if (wDisabled == false) {
+        opcDer10 = values.toString();
+      } else {}
     });
   }
 
   void group11(values) {
     setState(() {
-      opcDer11 = values.toString();
+      if (wDisabled == false) {
+        opcDer11 = values.toString();
+      } else {}
     });
   }
 
   void group12(values) {
     setState(() {
-      opcDer12 = values.toString();
+      if (wDisabled == false) {
+        opcDer12 = values.toString();
+      } else {}
     });
   }
 
   void group13(values) {
     setState(() {
-      opcDer13 = values.toString();
+      if (wDisabled == false) {
+        opcDer13 = values.toString();
+      } else {}
     });
   }
 
   void group14(values) {
     setState(() {
-      opcDel14 = values.toString();
+      if (wDisabled == false) {
+        opcDel14 = values.toString();
+      } else {}
     });
   }
 
   void group15(values) {
     setState(() {
-      opcDel15 = values.toString();
+      if (wDisabled == false) {
+        opcDel15 = values.toString();
+      } else {}
     });
   }
 
   void group16(values) {
     setState(() {
-      opcTras16 = values.toString();
+      if (wDisabled == false) {
+        opcTras16 = values.toString();
+      } else {}
     });
   }
 
   void group17(values) {
     setState(() {
-      opcTras17 = values.toString();
+      if (wDisabled == false) {
+        opcTras17 = values.toString();
+      } else {}
     });
+  }
+
+  void llenado() {
+    setState(() {
+      opcIzq01 = rSeleccionado[0];
+      opcIzq02 = rSeleccionado[1];
+      opcIzq03 = rSeleccionado[2];
+      opcIzq04 = rSeleccionado[3];
+      opcIzq05 = rSeleccionado[4];
+      opcIzq06 = rSeleccionado[5];
+      opcIzq07 = rSeleccionado[6];
+      opcIzq08 = rSeleccionado[7];
+      opcIzq09 = rSeleccionado[8];
+
+      opcDer10 = rSeleccionado[9];
+      opcDer11 = rSeleccionado[10];
+      opcDer12 = rSeleccionado[11];
+      opcDer13 = rSeleccionado[12];
+
+      opcDel14 = rSeleccionado[13];
+      opcDel15 = rSeleccionado[14];
+
+      opcTras16 = rSeleccionado[15];
+      opcTras17 = rSeleccionado[16];
+
+      obserController.text = rSeleccionado[17];
+    });
+  }
+
+  void actualizar() {
+    wDisabled = true;
+    rSeleccionado = ss.infoSuspension(widget.noOrden);
+    llenado();
   }
 
   @override
@@ -199,8 +282,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_int[0],
                                   groupValue: opcIzq01,
                                   onChanged: (value) {
@@ -208,8 +292,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_int[1],
                                   groupValue: opcIzq01,
                                   onChanged: (value) {
@@ -217,8 +302,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_int[2],
                                   groupValue: opcIzq01,
                                   onChanged: (value) {
@@ -238,8 +324,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_ext[0],
                                   groupValue: opcIzq02,
                                   onChanged: (value) {
@@ -247,8 +334,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_ext[1],
                                   groupValue: opcIzq02,
                                   onChanged: (value) {
@@ -256,8 +344,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lterminal_ext[2],
                                   groupValue: opcIzq02,
                                   onChanged: (value) {
@@ -277,8 +366,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_inf[0],
                                   groupValue: opcIzq03,
                                   onChanged: (value) {
@@ -286,8 +376,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_inf[1],
                                   groupValue: opcIzq03,
                                   onChanged: (value) {
@@ -295,8 +386,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_inf[2],
                                   groupValue: opcIzq03,
                                   onChanged: (value) {
@@ -316,8 +408,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_sup[0],
                                   groupValue: opcIzq04,
                                   onChanged: (value) {
@@ -325,8 +418,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_sup[1],
                                   groupValue: opcIzq04,
                                   onChanged: (value) {
@@ -334,8 +428,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lrotula_sup[2],
                                   groupValue: opcIzq04,
                                   onChanged: (value) {
@@ -355,8 +450,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_del[0],
                                   groupValue: opcIzq05,
                                   onChanged: (value) {
@@ -364,8 +460,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_del[1],
                                   groupValue: opcIzq05,
                                   onChanged: (value) {
@@ -373,8 +470,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_del[2],
                                   groupValue: opcIzq05,
                                   onChanged: (value) {
@@ -394,8 +492,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_tras[0],
                                   groupValue: opcIzq06,
                                   onChanged: (value) {
@@ -403,8 +502,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_tras[1],
                                   groupValue: opcIzq06,
                                   onChanged: (value) {
@@ -412,8 +512,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lamortiguador_tras[2],
                                   groupValue: opcIzq06,
                                   onChanged: (value) {
@@ -433,8 +534,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhorquilla[0],
                                   groupValue: opcIzq07,
                                   onChanged: (value) {
@@ -442,8 +544,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhorquilla[1],
                                   groupValue: opcIzq07,
                                   onChanged: (value) {
@@ -451,8 +554,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhorquilla[2],
                                   groupValue: opcIzq07,
                                   onChanged: (value) {
@@ -472,8 +576,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhules[0],
                                   groupValue: opcIzq08,
                                   onChanged: (value) {
@@ -481,8 +586,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhules[1],
                                   groupValue: opcIzq08,
                                   onChanged: (value) {
@@ -490,8 +596,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lhules[2],
                                   groupValue: opcIzq08,
                                   onChanged: (value) {
@@ -511,8 +618,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Ltornillos[0],
                                   groupValue: opcIzq09,
                                   onChanged: (value) {
@@ -520,8 +628,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Ltornillos[1],
                                   groupValue: opcIzq09,
                                   onChanged: (value) {
@@ -529,8 +638,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Ltornillos[2],
                                   groupValue: opcIzq09,
                                   onChanged: (value) {
@@ -557,8 +667,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_int[0],
                                   groupValue: opcDer10,
                                   onChanged: (value) {
@@ -566,8 +677,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_int[1],
                                   groupValue: opcDer10,
                                   onChanged: (value) {
@@ -575,8 +687,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_int[2],
                                   groupValue: opcDer10,
                                   onChanged: (value) {
@@ -596,8 +709,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_ext[0],
                                   groupValue: opcDer11,
                                   onChanged: (value) {
@@ -605,8 +719,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_ext[1],
                                   groupValue: opcDer11,
                                   onChanged: (value) {
@@ -614,8 +729,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rterminal_ext[2],
                                   groupValue: opcDer11,
                                   onChanged: (value) {
@@ -635,8 +751,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_inf[0],
                                   groupValue: opcDer12,
                                   onChanged: (value) {
@@ -644,8 +761,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_inf[1],
                                   groupValue: opcDer12,
                                   onChanged: (value) {
@@ -653,8 +771,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_inf[2],
                                   groupValue: opcDer12,
                                   onChanged: (value) {
@@ -674,8 +793,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_sup[0],
                                   groupValue: opcDer13,
                                   onChanged: (value) {
@@ -683,8 +803,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_sup[1],
                                   groupValue: opcDer13,
                                   onChanged: (value) {
@@ -692,8 +813,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rrotula_sup[2],
                                   groupValue: opcDer13,
                                   onChanged: (value) {
@@ -720,8 +842,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fgomas_amort[0],
                                   groupValue: opcDel14,
                                   onChanged: (value) {
@@ -729,8 +852,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fgomas_amort[1],
                                   groupValue: opcDel14,
                                   onChanged: (value) {
@@ -738,8 +862,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fgomas_amort[2],
                                   groupValue: opcDel14,
                                   onChanged: (value) {
@@ -759,8 +884,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fbujes[0],
                                   groupValue: opcDel15,
                                   onChanged: (value) {
@@ -768,8 +894,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fbujes[1],
                                   groupValue: opcDel15,
                                   onChanged: (value) {
@@ -777,8 +904,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fbujes[2],
                                   groupValue: opcDel15,
                                   onChanged: (value) {
@@ -805,8 +933,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bgomas_amort[0],
                                   groupValue: opcTras16,
                                   onChanged: (value) {
@@ -814,8 +943,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bgomas_amort[1],
                                   groupValue: opcTras16,
                                   onChanged: (value) {
@@ -823,8 +953,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bgomas_amort[2],
                                   groupValue: opcTras16,
                                   onChanged: (value) {
@@ -844,8 +975,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bbujes[0],
                                   groupValue: opcTras17,
                                   onChanged: (value) {
@@ -853,8 +985,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bbujes[1],
                                   groupValue: opcTras17,
                                   onChanged: (value) {
@@ -862,8 +995,9 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Bbujes[2],
                                   groupValue: opcTras17,
                                   onChanged: (value) {
@@ -878,57 +1012,62 @@ class _Servicio_suspension extends State<Servicio_suspension> {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: TextField(
+                          readOnly: wDisabled,
+                          controller: obserController,
                           maxLines: 10,
                           minLines: 6,
                           decoration: InputDecoration(
                               hintText: 'Observaciones',
-                              fillColor: Theme.of(context).secondaryHeaderColor,
+                              fillColor: wDisabled == true
+                                  ? Colors.white54
+                                  : Theme.of(context).secondaryHeaderColor,
                               filled: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  elevation: 5,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 35, vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  backgroundColor: Color(0xFF95A6DC)),
-                              onPressed: () {},
-                              child: Text(
-                                'Guardar',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 5,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 35, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              backgroundColor: Color(0xFF95A6DC)),
+                          onPressed: () {
+                            ss.addSuspension(
+                                widget.noOrden,
+                                opcIzq01!,
+                                opcIzq02!,
+                                opcIzq03!,
+                                opcIzq04!,
+                                opcIzq05!,
+                                opcIzq06!,
+                                opcIzq07!,
+                                opcIzq08!,
+                                opcIzq09!,
+                                opcDer10!,
+                                opcDer11!,
+                                opcDer12!,
+                                opcDer13!,
+                                opcDel14!,
+                                opcDel15!,
+                                opcTras16!,
+                                opcTras17!,
+                                obserController.text);
+                            actualizar();
+                          },
+                          child: Text(
+                            'Guardar',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 5,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 35, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor: Color(0xFF95A6DC)),
-                            onPressed: () {},
-                            child: Text(
-                              'Cancelar',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

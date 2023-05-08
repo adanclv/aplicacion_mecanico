@@ -1,8 +1,8 @@
+import 'package:aplicacion_mecanico/controlador/Save_servicio.dart';
 import 'package:flutter/material.dart';
 
 class Container_tasks extends StatelessWidget {
   final String noOrden;
-  final List<String> servicio;
   final String nombre;
   final String telefono;
   final String vehiculo;
@@ -11,7 +11,6 @@ class Container_tasks extends StatelessWidget {
   Container_tasks(
       {super.key,
       required this.noOrden,
-      required this.servicio,
       required this.nombre,
       required this.telefono,
       required this.vehiculo,
@@ -31,8 +30,31 @@ class Container_tasks extends StatelessWidget {
     return alto;
   }
 
+  bool check(String servicio) {
+    bool doing = false;
+    switch (servicio) {
+      case 'Afinacion (Por rellenar)':
+        doing = true;
+        break;
+      case 'Suspension (Por rellenar)':
+        doing = true;
+        break;
+      case 'Frenos (Por rellenar)':
+        doing = true;
+        break;
+      case 'Direccion Hidraulica (Por rellenar)':
+        doing = true;
+        break;
+    }
+    return doing;
+  }
+
+  Save_servicio ss = Save_servicio();
+  List<String> servicio = [];
+
   @override
   Widget build(BuildContext context) {
+    servicio = ss.list_servicios(nombre);
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).secondaryHeaderColor,
@@ -61,7 +83,10 @@ class Container_tasks extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 8),
                         child: Text(
                           e,
-                          style: TextStyle(fontSize: 17, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: 17,
+                              color:
+                                  check(e) == true ? Colors.red : Colors.black),
                         ),
                       ),
                     )

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../controlador/Save_servicio.dart';
 import '../util/container_CupertinoSegmentedControl.dart';
 
 class Pantalla_principal extends StatefulWidget {
@@ -15,9 +16,12 @@ class Pantalla_principal extends StatefulWidget {
 }
 
 class _Pantalla_principal extends State<Pantalla_principal> {
+  Save_servicio sSuspension = Save_servicio();
+
   int indexCupertino = 0;
   int horaActual = DateTime.now().hour;
   String mensaje = '';
+  int i = 0;
 
   List<String> prod = ['holas', 'holads', 'perros'];
 
@@ -174,12 +178,10 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                                               .info(e.nombre, e.placas)
                                               .color),
                                     ),
-                                  );
+                                  ).whenComplete(() => actualizar());
                                 },
                                 child: Container_tasks(
                                     noOrden: e.noOrden,
-                                    servicio:
-                                        newCliente.list_servicios(e.nombre),
                                     nombre: e.nombre,
                                     telefono: e.telefono,
                                     vehiculo:

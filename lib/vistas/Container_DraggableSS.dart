@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 class Container_DraggableSS extends StatefulWidget {
   final ScrollController scroll;
   final String nombre;
+  final String noOrden;
 
   Container_DraggableSS(
-      {super.key, required this.scroll, required this.nombre});
+      {super.key,
+      required this.scroll,
+      required this.nombre,
+      required this.noOrden});
 
   @override
   State<Container_DraggableSS> createState() => _Container_DraggableSS();
@@ -22,8 +26,8 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
   @override
   void initState() {
     super.initState();
-    lista_servicios = newCliente.list_servicios(widget.nombre);
-    paginas = newCliente.list_paginas(lista_servicios);
+    lista_servicios = newCliente.list_servicios(widget.nombre, false);
+    paginas = newCliente.list_paginas(lista_servicios, widget.noOrden);
   }
 
   int indexCupertino = 0;

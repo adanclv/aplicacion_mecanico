@@ -1,5 +1,7 @@
+import 'package:aplicacion_mecanico/modelo/Afinacion.dart';
 import 'package:aplicacion_mecanico/modelo/Clientes.dart';
 import 'package:aplicacion_mecanico/modelo/Pendientes.dart';
+import 'package:aplicacion_mecanico/modelo/Suspension.dart';
 import 'package:aplicacion_mecanico/modelo/Vehiculos.dart';
 import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
@@ -17,14 +19,20 @@ void main() async {
   Hive.registerAdapter(ClienteAdapter());
   Hive.registerAdapter(VehiculoAdapter());
   Hive.registerAdapter(PendientesAdapter());
+  Hive.registerAdapter(SuspensionAdapter());
+  Hive.registerAdapter(AfinacionAdapter());
 
   var box1 = await Hive.openBox('clientesBox');
   var box2 = await Hive.openBox('vehiculosBox');
   var box3 = await Hive.openBox('pendientesBox');
+  var box4 = await Hive.openBox('suspensionBox');
+  var box5 = await Hive.openBox('afinacionBox');
 
   // box1.clear();
   // box2.clear();
   // box3.clear();
+  // box4.clear();
+  // box5.clear();
 
   runApp(const MainApp());
 }
@@ -53,8 +61,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: myColor,
         secondaryHeaderColor: Color(0xFFE6EFFF),
       ),
-      home: //const Condiciones_del_motor(),
-          const MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }

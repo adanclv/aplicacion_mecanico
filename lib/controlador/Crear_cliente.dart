@@ -83,11 +83,49 @@ class Crear_cliente {
     print(box.values.toList());
   }
 
-  List<String> list_servicios(String nombre) {
-    List<String> lista_servicios = [''];
+  List<String> list_servicios(String nombre, bool existe) {
+    //llena la lista
+    List<String> lista_servicios = [];
     var box = Hive.box('pendientesBox');
 
-    lista_servicios.clear();
+    for (Pendientes pendientes in box.values) {
+      if (pendientes.nombre == nombre) {
+        if (pendientes.afinacion == 1) {
+          if (existe == true) {
+            lista_servicios.add('Afinacion');
+          } else {
+            lista_servicios.add('Afinacion (Por rellenar)');
+          }
+        }
+        if (pendientes.frenos == 1) {
+          // if(existe == true){
+
+          // }else{}
+          lista_servicios.add('Frenos');
+        }
+        if (pendientes.suspension == 1) {
+          if (existe == true) {
+            lista_servicios.add('Suspension');
+          } else {
+            lista_servicios.add('Suspension (Por rellenar)');
+          }
+        }
+        if (pendientes.hidraulica == 1) {
+          // if(existe == true){
+
+          // }else{}
+          lista_servicios.add('Direccion Hidraulica');
+        }
+      }
+    }
+    print(lista_servicios);
+    return lista_servicios;
+  }
+
+  List<String> list_servicios2(String nombre) {
+    //llena la lista
+    List<String> lista_servicios = [];
+    var box = Hive.box('pendientesBox');
 
     for (Pendientes pendientes in box.values) {
       if (pendientes.nombre == nombre) {
@@ -105,6 +143,7 @@ class Crear_cliente {
         }
       }
     }
+    print(lista_servicios);
     return lista_servicios;
   }
 
@@ -112,13 +151,14 @@ class Crear_cliente {
     Map<int, Widget> servicios = {};
 
     for (int i = 0; i < lista.length; i++) {
-      if (lista[i] == 'Afinacion') {
+      if (lista[i] == 'Afinacion' || lista[i] == 'Afinacion (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Afinacion', indexN: index, i: i);
       } else if (lista[i] == 'Frenos') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Frenos', indexN: index, i: i);
-      } else if (lista[i] == 'Suspension') {
+      } else if (lista[i] == 'Suspension' ||
+          lista[i] == 'Suspension (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Suspension', indexN: index, i: i);
       } else if (lista[i] == 'Direccion Hidraulica') {
@@ -133,16 +173,17 @@ class Crear_cliente {
     return servicios;
   }
 
-  List<Widget> list_paginas(List<String> lista) {
+  List<Widget> list_paginas(List<String> lista, String noOrden) {
     List<Widget> lista_servicios = [];
 
     for (int i = 0; i < lista.length; i++) {
-      if (lista[i] == 'Afinacion') {
-        lista_servicios.add(Servicio_afinacion());
+      if (lista[i] == 'Afinacion' || lista[i] == 'Afinacion (Por rellenar)') {
+        lista_servicios.add(Servicio_afinacion(noOrden: noOrden));
       } else if (lista[i] == 'Frenos') {
         lista_servicios.add(Servicio_frenos());
-      } else if (lista[i] == 'Suspension') {
-        lista_servicios.add(Servicio_suspension());
+      } else if (lista[i] == 'Suspension' ||
+          lista[i] == 'Suspension (Por rellenar)') {
+        lista_servicios.add(Servicio_suspension(noOrden: noOrden));
       } else if (lista[i] == 'Direccion Hidraulica') {
         lista_servicios.add(Servicio_dir_hidraulica());
       }
