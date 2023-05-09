@@ -1,7 +1,9 @@
+import 'package:aplicacion_mecanico/controlador/Save_servicio.dart';
 import 'package:flutter/material.dart';
 
 class Condicion_sistema_enfriamiento extends StatefulWidget {
-  const Condicion_sistema_enfriamiento({super.key});
+  final String noOrden;
+  const Condicion_sistema_enfriamiento({super.key, required this.noOrden});
 
   @override
   State<Condicion_sistema_enfriamiento> createState() =>
@@ -20,6 +22,11 @@ List<String> Deposito = ['si', 'no'];
 
 class _Condicion_sistema_enfriamiento
     extends State<Condicion_sistema_enfriamiento> {
+  Save_servicio ss = Save_servicio();
+  List<String> rSeleccionado = [];
+  bool wDisabled = false;
+
+  TextEditingController obserController = TextEditingController();
   String? opcRadiador;
   String? opcAnticongelante;
   String? opcAgua;
@@ -30,58 +37,107 @@ class _Condicion_sistema_enfriamiento
   String? opcAbrazaderas;
   String? opcDeposito;
 
+  @override
+  void initState() {
+    super.initState();
+    if (ss.existeEnfriamiento(widget.noOrden)) {
+      wDisabled = true;
+      rSeleccionado = ss.infoEnfriamiento(widget.noOrden);
+      llenado();
+    }
+  }
+
   void group01(values) {
     setState(() {
-      opcRadiador = values.toString();
+      if (wDisabled == false) {
+        opcRadiador = values.toString();
+      } else {}
     });
   }
 
   void group02(values) {
     setState(() {
-      opcAnticongelante = values.toString();
+      if (wDisabled == false) {
+        opcAnticongelante = values.toString();
+      } else {}
     });
   }
 
   void group03(values) {
     setState(() {
-      opcAgua = values.toString();
+      if (wDisabled == false) {
+        opcAgua = values.toString();
+      } else {}
     });
   }
 
   void group04(values) {
     setState(() {
-      opcBombaAgua = values.toString();
+      if (wDisabled == false) {
+        opcBombaAgua = values.toString();
+      } else {}
     });
   }
 
   void group05(values) {
     setState(() {
-      opcTermostato = values.toString();
+      if (wDisabled == false) {
+        opcTermostato = values.toString();
+      } else {}
     });
   }
 
   void group06(values) {
     setState(() {
-      opcManguera = values.toString();
+      if (wDisabled == false) {
+        opcManguera = values.toString();
+      } else {}
     });
   }
 
   void group07(values) {
     setState(() {
-      opcTapon = values.toString();
+      if (wDisabled == false) {
+        opcTapon = values.toString();
+      } else {}
     });
   }
 
   void group08(values) {
     setState(() {
-      opcAbrazaderas = values.toString();
+      if (wDisabled == false) {
+        opcAbrazaderas = values.toString();
+      } else {}
     });
   }
 
   void group09(values) {
     setState(() {
-      opcDeposito = values.toString();
+      if (wDisabled == false) {
+        opcDeposito = values.toString();
+      } else {}
     });
+  }
+
+  void llenado() {
+    setState(() {
+      opcRadiador = rSeleccionado[0];
+      opcAnticongelante = rSeleccionado[1];
+      opcAgua = rSeleccionado[2];
+      opcBombaAgua = rSeleccionado[3];
+      opcTermostato = rSeleccionado[4];
+      opcManguera = rSeleccionado[5];
+      opcTapon = rSeleccionado[6];
+      opcAbrazaderas = rSeleccionado[7];
+      opcDeposito = rSeleccionado[8];
+      obserController.text = rSeleccionado[9];
+    });
+  }
+
+  void actualizar() {
+    wDisabled = true;
+    rSeleccionado = ss.infoEnfriamiento(widget.noOrden);
+    llenado();
   }
 
   @override
@@ -118,8 +174,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Radiador[0],
                                   groupValue: opcRadiador,
                                   onChanged: (value) {
@@ -127,8 +184,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Radiador[1],
                                   groupValue: opcRadiador,
                                   onChanged: (value) {
@@ -148,8 +206,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Anticongelante[0],
                                   groupValue: opcAnticongelante,
                                   onChanged: (value) {
@@ -157,8 +216,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Anticongelante[1],
                                   groupValue: opcAnticongelante,
                                   onChanged: (value) {
@@ -178,8 +238,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Agua[0],
                                   groupValue: opcAgua,
                                   onChanged: (value) {
@@ -187,8 +248,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Agua[1],
                                   groupValue: opcAgua,
                                   onChanged: (value) {
@@ -208,8 +270,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: FugaBomba[0],
                                   groupValue: opcBombaAgua,
                                   onChanged: (value) {
@@ -217,8 +280,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: FugaBomba[1],
                                   groupValue: opcBombaAgua,
                                   onChanged: (value) {
@@ -238,8 +302,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Termostato[0],
                                   groupValue: opcTermostato,
                                   onChanged: (value) {
@@ -247,8 +312,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Termostato[1],
                                   groupValue: opcTermostato,
                                   onChanged: (value) {
@@ -268,8 +334,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Mangueras[0],
                                   groupValue: opcManguera,
                                   onChanged: (value) {
@@ -277,8 +344,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Mangueras[1],
                                   groupValue: opcManguera,
                                   onChanged: (value) {
@@ -298,8 +366,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: FugaTapon[0],
                                   groupValue: opcTapon,
                                   onChanged: (value) {
@@ -307,8 +376,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: FugaTapon[1],
                                   groupValue: opcTapon,
                                   onChanged: (value) {
@@ -328,8 +398,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Abrazaderas[0],
                                   groupValue: opcAbrazaderas,
                                   onChanged: (value) {
@@ -337,8 +408,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Abrazaderas[1],
                                   groupValue: opcAbrazaderas,
                                   onChanged: (value) {
@@ -358,8 +430,9 @@ class _Condicion_sistema_enfriamiento
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Deposito[0],
                                   groupValue: opcDeposito,
                                   onChanged: (value) {
@@ -367,8 +440,9 @@ class _Condicion_sistema_enfriamiento
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Deposito[1],
                                   groupValue: opcDeposito,
                                   onChanged: (value) {
@@ -383,58 +457,55 @@ class _Condicion_sistema_enfriamiento
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: TextField(
+                          readOnly: wDisabled,
+                          controller: obserController,
                           maxLines: 10,
                           minLines: 6,
                           decoration: InputDecoration(
                               hintText: 'Observaciones',
-                              fillColor: Theme.of(context).secondaryHeaderColor,
+                              fillColor: wDisabled == true
+                                  ? Colors.white54
+                                  : Theme.of(context).secondaryHeaderColor,
                               filled: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  elevation: 5,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 35, vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  backgroundColor: Color(0xFF95A6DC)),
-                              onPressed: () {},
-                              child: Text(
-                                'Guardar',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 5,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 35, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              backgroundColor: Color(0xFF95A6DC)),
+                          onPressed: () {
+                            ss.addEnfriamiento(
+                                widget.noOrden,
+                                opcRadiador!,
+                                opcAnticongelante!,
+                                opcAgua!,
+                                opcBombaAgua!,
+                                opcTermostato!,
+                                opcManguera!,
+                                opcTapon!,
+                                opcAbrazaderas!,
+                                opcDeposito!,
+                                obserController.text);
+                            actualizar();
+                          },
+                          child: Text(
+                            'Guardar',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 5,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 35, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor: Color(0xFF95A6DC)),
-                            onPressed: () {},
-                            child: Text(
-                              'Cancelar',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ], //principal
+                      SizedBox(height: 20),
+                    ],
                   ),
                 ),
               ],

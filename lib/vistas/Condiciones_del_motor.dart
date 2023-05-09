@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
+import '../controlador/Save_servicio.dart';
 
 class Condiciones_del_motor extends StatefulWidget {
-  const Condiciones_del_motor({super.key});
+  final String noOrden;
+  const Condiciones_del_motor({super.key, required this.noOrden});
 
   @override
   State<Condiciones_del_motor> createState() => _Condiciones_del_motor();
@@ -33,6 +34,11 @@ List<String> Reten_arbol_a = ['cambio', 'mal', 'bien'];
 List<String> Reten_arbol_a_goteo = ['si', 'no'];
 
 class _Condiciones_del_motor extends State<Condiciones_del_motor> {
+  Save_servicio ss = Save_servicio();
+  List<String> rSeleccionado = [];
+  bool wDisabled = false;
+
+  TextEditingController obserController = TextEditingController();
   String? opcion01; //Banda Alternador
   String? opcion02; //Polea Tensora
   String? opcion03; //Polea Loca
@@ -56,130 +62,206 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
   String? opcion17; //Reten Arbol A
   String? opcion18; //Reten Arbol A Goteo
 
+  @override
+  void initState() {
+    super.initState();
+    if (ss.existeMotor(widget.noOrden)) {
+      wDisabled = true;
+      rSeleccionado = ss.infoMotor(widget.noOrden);
+      llenado();
+    }
+  }
+
   void group01(values) {
     //Banda Alternador
     setState(() {
-      opcion01 = values.toString();
+      if (wDisabled == false) {
+        opcion01 = values.toString();
+      } else {}
     });
   }
 
   void group02(values) {
     //Polea Tensora
     setState(() {
-      opcion02 = values.toString();
+      if (wDisabled == false) {
+        opcion02 = values.toString();
+      } else {}
     });
   }
 
   void group03(values) {
     //Polea Loca
     setState(() {
-      opcion03 = values.toString();
+      if (wDisabled == false) {
+        opcion03 = values.toString();
+      } else {}
     });
   }
 
   void group04(values) {
     //Bomba de Agua
     setState(() {
-      opcion04 = values.toString();
+      if (wDisabled == false) {
+        opcion04 = values.toString();
+      } else {}
     });
   }
 
   void group05(values) {
     //Fan Clutch
     setState(() {
-      opcion05 = values.toString();
+      if (wDisabled == false) {
+        opcion05 = values.toString();
+      } else {}
     });
   }
 
   void group06(values) {
     //Presion Bomba de Aceite
     setState(() {
-      opcion06 = values.toString();
+      if (wDisabled == false) {
+        opcion06 = values.toString();
+      } else {}
     });
   }
 
   void group07(values) {
     //Tapa de Punterias
     setState(() {
-      opcion07 = values.toString();
+      if (wDisabled == false) {
+        opcion07 = values.toString();
+      } else {}
     });
   }
 
   void group08(values) {
     //Tapa del Carter
     setState(() {
-      opcion08 = values.toString();
+      if (wDisabled == false) {
+        opcion08 = values.toString();
+      } else {}
     });
   }
 
   void group09(values) {
     //Registros de Monoblock
     setState(() {
-      opcion09 = values.toString();
+      if (wDisabled == false) {
+        opcion09 = values.toString();
+      } else {}
     });
   }
 
   void group10(values) {
     //Cadena de Tiempo
     setState(() {
-      opcion10 = values.toString();
+      if (wDisabled == false) {
+        opcion10 = values.toString();
+      } else {}
     });
   }
 
   void group11(values) {
     //Reten del Cigueñal Trasero
     setState(() {
-      opcion11 = values.toString();
+      if (wDisabled == false) {
+        opcion11 = values.toString();
+      } else {}
     });
   }
 
   void group12(values) {
     //Reten del Cigueñal Trasero Goteo
     setState(() {
-      opcion12 = values.toString();
+      if (wDisabled == false) {
+        opcion12 = values.toString();
+      } else {}
     });
   }
 
   void group13(values) {
     //Reten del Cigueñal Delantero
     setState(() {
-      opcion13 = values.toString();
+      if (wDisabled == false) {
+        opcion13 = values.toString();
+      } else {}
     });
   }
 
   void group14(values) {
     //Reten del Cigueñal Delantero Goteo
     setState(() {
-      opcion14 = values.toString();
+      if (wDisabled == false) {
+        opcion14 = values.toString();
+      } else {}
     });
   }
 
   void group15(values) {
     //Reten Arbol E
     setState(() {
-      opcion15 = values.toString();
+      if (wDisabled == false) {
+        opcion15 = values.toString();
+      } else {}
     });
   }
 
   void group16(values) {
     //Reten Arbol E Goteo
     setState(() {
-      opcion16 = values.toString();
+      if (wDisabled == false) {
+        opcion16 = values.toString();
+      } else {}
     });
   }
 
   void group17(values) {
     //Reten Arbol A
     setState(() {
-      opcion17 = values.toString();
+      if (wDisabled == false) {
+        opcion17 = values.toString();
+      } else {}
     });
   }
 
   void group18(values) {
     //Reten Arbol A Goteo
     setState(() {
-      opcion18 = values.toString();
+      if (wDisabled == false) {
+        opcion18 = values.toString();
+      } else {}
     });
+  }
+
+  void llenado() {
+    setState(() {
+      opcion01 = rSeleccionado[0];
+      opcion02 = rSeleccionado[1];
+      opcion03 = rSeleccionado[2];
+      opcion04 = rSeleccionado[3];
+      opcion05 = rSeleccionado[4];
+      opcion06 = rSeleccionado[5];
+      opcion07 = rSeleccionado[6];
+      opcion08 = rSeleccionado[7];
+      opcion09 = rSeleccionado[8];
+      opcion10 = rSeleccionado[9];
+      opcion11 = rSeleccionado[10];
+      opcion12 = rSeleccionado[11];
+      opcion13 = rSeleccionado[12];
+      opcion14 = rSeleccionado[13];
+      opcion15 = rSeleccionado[14];
+      opcion16 = rSeleccionado[15];
+      opcion17 = rSeleccionado[16];
+      opcion18 = rSeleccionado[17];
+      obserController.text = rSeleccionado[18];
+    });
+  }
+
+  void actualizar() {
+    wDisabled = true;
+    rSeleccionado = ss.infoMotor(widget.noOrden);
+    llenado();
   }
 
   @override
@@ -210,8 +292,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: banda_alternador[0],
                                   groupValue: opcion01,
                                   onChanged: (value) {
@@ -228,8 +311,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: banda_alternador[1],
                                   groupValue: opcion01,
                                   onChanged: (value) {
@@ -246,8 +330,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: banda_alternador[2],
                                   groupValue: opcion01,
                                   onChanged: (value) {
@@ -278,8 +363,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_tensora[0],
                                   groupValue: opcion02,
                                   onChanged: (value) {
@@ -287,8 +373,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_tensora[1],
                                   groupValue: opcion02,
                                   onChanged: (value) {
@@ -296,8 +383,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_tensora[2],
                                   groupValue: opcion02,
                                   onChanged: (value) {
@@ -317,8 +405,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_loca[0],
                                   groupValue: opcion03,
                                   onChanged: (value) {
@@ -326,8 +415,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_loca[1],
                                   groupValue: opcion03,
                                   onChanged: (value) {
@@ -335,8 +425,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: polea_loca[2],
                                   groupValue: opcion03,
                                   onChanged: (value) {
@@ -370,8 +461,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: bomba_agua[0],
                                   groupValue: opcion04,
                                   onChanged: (value) {
@@ -388,8 +480,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: bomba_agua[1],
                                   groupValue: opcion04,
                                   onChanged: (value) {
@@ -420,8 +513,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: fan_clutch[0],
                                   groupValue: opcion05,
                                   onChanged: (value) {
@@ -429,8 +523,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: fan_clutch[1],
                                   groupValue: opcion05,
                                   onChanged: (value) {
@@ -438,8 +533,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: fan_clutch[2],
                                   groupValue: opcion05,
                                   onChanged: (value) {
@@ -473,8 +569,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: bomba_aceite[0],
                                   groupValue: opcion06,
                                   onChanged: (value) {
@@ -491,8 +588,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: bomba_aceite[1],
                                   groupValue: opcion06,
                                   onChanged: (value) {
@@ -509,8 +607,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 16)),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: bomba_aceite[2],
                                   groupValue: opcion06,
                                   onChanged: (value) {
@@ -539,8 +638,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: tapa_punterias[0],
                                   groupValue: opcion07,
                                   onChanged: (value) {
@@ -548,8 +648,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: tapa_punterias[1],
                                   groupValue: opcion07,
                                   onChanged: (value) {
@@ -569,8 +670,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: tapa_carter[0],
                                   groupValue: opcion08,
                                   onChanged: (value) {
@@ -578,8 +680,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: tapa_carter[1],
                                   groupValue: opcion08,
                                   onChanged: (value) {
@@ -599,8 +702,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: registro_monoblock[0],
                                   groupValue: opcion09,
                                   onChanged: (value) {
@@ -608,8 +712,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: registro_monoblock[1],
                                   groupValue: opcion09,
                                   onChanged: (value) {
@@ -636,8 +741,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: cadena_tiempo[0],
                                   groupValue: opcion10,
                                   onChanged: (value) {
@@ -645,8 +751,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: cadena_tiempo[1],
                                   groupValue: opcion10,
                                   onChanged: (value) {
@@ -724,8 +831,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Breten_ciguenal[0],
                                   groupValue: opcion11,
                                   onChanged: (value) {
@@ -733,8 +841,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Breten_ciguenal[1],
                                   groupValue: opcion11,
                                   onChanged: (value) {
@@ -742,8 +851,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Breten_ciguenal[2],
                                   groupValue: opcion11,
                                   onChanged: (value) {
@@ -757,8 +867,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Freten_ciguenal[0],
                                   groupValue: opcion13,
                                   onChanged: (value) {
@@ -766,8 +877,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Freten_ciguenal[1],
                                   groupValue: opcion13,
                                   onChanged: (value) {
@@ -775,8 +887,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Freten_ciguenal[2],
                                   groupValue: opcion13,
                                   onChanged: (value) {
@@ -835,8 +948,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Breten_ciguenal_goteo[0],
                                   groupValue: opcion12,
                                   onChanged: (value) {
@@ -844,8 +958,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Breten_ciguenal_goteo[1],
                                   groupValue: opcion12,
                                   onChanged: (value) {
@@ -859,8 +974,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Freten_ciguenal_goteo[0],
                                   groupValue: opcion14,
                                   onChanged: (value) {
@@ -868,8 +984,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Freten_ciguenal_goteo[1],
                                   groupValue: opcion14,
                                   onChanged: (value) {
@@ -947,8 +1064,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_e[0],
                                   groupValue: opcion15,
                                   onChanged: (value) {
@@ -956,8 +1074,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_e[1],
                                   groupValue: opcion15,
                                   onChanged: (value) {
@@ -965,8 +1084,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_e[2],
                                   groupValue: opcion15,
                                   onChanged: (value) {
@@ -980,8 +1100,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_a[0],
                                   groupValue: opcion17,
                                   onChanged: (value) {
@@ -989,8 +1110,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_a[1],
                                   groupValue: opcion17,
                                   onChanged: (value) {
@@ -998,8 +1120,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_a[2],
                                   groupValue: opcion17,
                                   onChanged: (value) {
@@ -1058,8 +1181,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_e_goteo[0],
                                   groupValue: opcion16,
                                   onChanged: (value) {
@@ -1067,8 +1191,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_e_goteo[1],
                                   groupValue: opcion16,
                                   onChanged: (value) {
@@ -1082,8 +1207,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_a_goteo[0],
                                   groupValue: opcion18,
                                   onChanged: (value) {
@@ -1091,8 +1217,9 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Reten_arbol_a_goteo[1],
                                   groupValue: opcion18,
                                   onChanged: (value) {
@@ -1110,56 +1237,60 @@ class _Condiciones_del_motor extends State<Condiciones_del_motor> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: TextField(
+                    readOnly: wDisabled,
+                    controller: obserController,
                     maxLines: 10,
                     minLines: 6,
                     decoration: InputDecoration(
                         hintText: 'Observaciones',
-                        fillColor: Theme.of(context).secondaryHeaderColor,
+                        fillColor: wDisabled == true
+                            ? Colors.white54
+                            : Theme.of(context).secondaryHeaderColor,
                         filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            elevation: 5,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 35, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            backgroundColor: Color(0xFF95A6DC)),
-                        onPressed: () {},
-                        child: Text(
-                          'Guardar',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ),
+                Container(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        backgroundColor: Color(0xFF95A6DC)),
+                    onPressed: () {
+                      ss.addMotor(
+                          widget.noOrden,
+                          opcion01!,
+                          opcion02!,
+                          opcion03!,
+                          opcion04!,
+                          opcion05!,
+                          opcion06!,
+                          opcion07!,
+                          opcion08!,
+                          opcion09!,
+                          opcion10!,
+                          opcion11!,
+                          opcion12!,
+                          opcion13!,
+                          opcion14!,
+                          opcion15!,
+                          opcion16!,
+                          opcion17!,
+                          opcion18!,
+                          obserController.text);
+                      actualizar();
+                    },
+                    child: Text(
+                      'Guardar',
+                      style: TextStyle(
+                          fontSize: 16, color: Theme.of(context).primaryColor),
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          elevation: 5,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 35, vertical: 15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          backgroundColor: Color(0xFF95A6DC)),
-                      onPressed: () {},
-                      child: Text(
-                        'Cancelar',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

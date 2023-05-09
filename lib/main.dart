@@ -1,6 +1,10 @@
 import 'package:aplicacion_mecanico/modelo/Afinacion.dart';
 import 'package:aplicacion_mecanico/modelo/Clientes.dart';
+import 'package:aplicacion_mecanico/modelo/Condicion_motor.dart';
+import 'package:aplicacion_mecanico/modelo/Direccion_Hidraulica.dart';
+import 'package:aplicacion_mecanico/modelo/Frenos.dart';
 import 'package:aplicacion_mecanico/modelo/Pendientes.dart';
+import 'package:aplicacion_mecanico/modelo/Sistema_enfriamiento.dart';
 import 'package:aplicacion_mecanico/modelo/Suspension.dart';
 import 'package:aplicacion_mecanico/modelo/Vehiculos.dart';
 import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
@@ -21,18 +25,31 @@ void main() async {
   Hive.registerAdapter(PendientesAdapter());
   Hive.registerAdapter(SuspensionAdapter());
   Hive.registerAdapter(AfinacionAdapter());
+  Hive.registerAdapter(FrenosAdapter());
+  Hive.registerAdapter(Direccion_HidraulicaAdapter());
+  Hive.registerAdapter(Condicion_motorAdapter());
+  Hive.registerAdapter(Sistema_enfriamientoAdapter());
 
   var box1 = await Hive.openBox('clientesBox');
   var box2 = await Hive.openBox('vehiculosBox');
   var box3 = await Hive.openBox('pendientesBox');
   var box4 = await Hive.openBox('suspensionBox');
   var box5 = await Hive.openBox('afinacionBox');
+  var box6 = await Hive.openBox('frenosBox');
+  var box7 = await Hive.openBox('hidraulicaBox');
+  var box8 = await Hive.openBox('motorBox');
+  var box9 = await Hive.openBox('enfriamientoBox');
 
+//Borrar toda la info
   // box1.clear();
   // box2.clear();
   // box3.clear();
   // box4.clear();
   // box5.clear();
+  // box6.clear();
+  // box7.clear();
+  // box8.clear();
+  // box9.clear();
 
   runApp(const MainApp());
 }

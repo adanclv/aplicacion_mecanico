@@ -83,70 +83,6 @@ class Crear_cliente {
     print(box.values.toList());
   }
 
-  List<String> list_servicios(String nombre, bool existe) {
-    //llena la lista
-    List<String> lista_servicios = [];
-    var box = Hive.box('pendientesBox');
-
-    for (Pendientes pendientes in box.values) {
-      if (pendientes.nombre == nombre) {
-        if (pendientes.afinacion == 1) {
-          if (existe == true) {
-            lista_servicios.add('Afinacion');
-          } else {
-            lista_servicios.add('Afinacion (Por rellenar)');
-          }
-        }
-        if (pendientes.frenos == 1) {
-          // if(existe == true){
-
-          // }else{}
-          lista_servicios.add('Frenos');
-        }
-        if (pendientes.suspension == 1) {
-          if (existe == true) {
-            lista_servicios.add('Suspension');
-          } else {
-            lista_servicios.add('Suspension (Por rellenar)');
-          }
-        }
-        if (pendientes.hidraulica == 1) {
-          // if(existe == true){
-
-          // }else{}
-          lista_servicios.add('Direccion Hidraulica');
-        }
-      }
-    }
-    print(lista_servicios);
-    return lista_servicios;
-  }
-
-  List<String> list_servicios2(String nombre) {
-    //llena la lista
-    List<String> lista_servicios = [];
-    var box = Hive.box('pendientesBox');
-
-    for (Pendientes pendientes in box.values) {
-      if (pendientes.nombre == nombre) {
-        if (pendientes.afinacion == 1) {
-          lista_servicios.add('Afinacion');
-        }
-        if (pendientes.frenos == 1) {
-          lista_servicios.add('Frenos');
-        }
-        if (pendientes.suspension == 1) {
-          lista_servicios.add('Suspension');
-        }
-        if (pendientes.hidraulica == 1) {
-          lista_servicios.add('Direccion Hidraulica');
-        }
-      }
-    }
-    print(lista_servicios);
-    return lista_servicios;
-  }
-
   Map<int, Widget> mapa_servicios(List<String> lista, int index) {
     Map<int, Widget> servicios = {};
 
@@ -154,14 +90,15 @@ class Crear_cliente {
       if (lista[i] == 'Afinacion' || lista[i] == 'Afinacion (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Afinacion', indexN: index, i: i);
-      } else if (lista[i] == 'Frenos') {
+      } else if (lista[i] == 'Frenos' || lista[i] == 'Frenos (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Frenos', indexN: index, i: i);
       } else if (lista[i] == 'Suspension' ||
           lista[i] == 'Suspension (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Suspension', indexN: index, i: i);
-      } else if (lista[i] == 'Direccion Hidraulica') {
+      } else if (lista[i] == 'Direccion Hidraulica' ||
+          lista[i] == 'Direccion Hidraulica (Por rellenar)') {
         servicios[i] = Container_CupertinoSegmentedControl2(
             textN: 'Direccion Hidraulica', indexN: index, i: i);
       }
@@ -179,17 +116,18 @@ class Crear_cliente {
     for (int i = 0; i < lista.length; i++) {
       if (lista[i] == 'Afinacion' || lista[i] == 'Afinacion (Por rellenar)') {
         lista_servicios.add(Servicio_afinacion(noOrden: noOrden));
-      } else if (lista[i] == 'Frenos') {
-        lista_servicios.add(Servicio_frenos());
+      } else if (lista[i] == 'Frenos' || lista[i] == 'Frenos (Por rellenar)') {
+        lista_servicios.add(Servicio_frenos(noOrden: noOrden));
       } else if (lista[i] == 'Suspension' ||
           lista[i] == 'Suspension (Por rellenar)') {
         lista_servicios.add(Servicio_suspension(noOrden: noOrden));
-      } else if (lista[i] == 'Direccion Hidraulica') {
-        lista_servicios.add(Servicio_dir_hidraulica());
+      } else if (lista[i] == 'Direccion Hidraulica' ||
+          lista[i] == 'Direccion Hidraulica (Por rellenar)') {
+        lista_servicios.add(Servicio_dir_hidraulica(noOrden: noOrden));
       }
     }
-    lista_servicios.add(Condiciones_del_motor());
-    lista_servicios.add(Condicion_sistema_enfriamiento());
+    lista_servicios.add(Condiciones_del_motor(noOrden: noOrden));
+    lista_servicios.add(Condicion_sistema_enfriamiento(noOrden: noOrden));
     return lista_servicios;
   }
 

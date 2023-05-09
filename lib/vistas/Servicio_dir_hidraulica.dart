@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../controlador/Save_servicio.dart';
+
 class Servicio_dir_hidraulica extends StatefulWidget {
-  const Servicio_dir_hidraulica({super.key});
+  final String noOrden;
+  const Servicio_dir_hidraulica({super.key, required this.noOrden});
 
   @override
   State<Servicio_dir_hidraulica> createState() => _Servicio_dir_hidraulica();
@@ -15,47 +18,92 @@ List<String> Lcremallera = ['cambio', 'mal', 'bien'];
 List<String> Rcremallera = ['cambio', 'mal', 'bien'];
 
 class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
+  Save_servicio ss = Save_servicio();
+  List<String> rSeleccionado = [];
+  bool wDisabled = false;
+
   String? opcFuga;
   String? opcConRuido;
   String? opcAltaPresion;
   String? opcRetorno;
   String? opcLcremallera;
   String? opcRcremallera;
+  TextEditingController obserController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (ss.existeHidraulica(widget.noOrden)) {
+      wDisabled = true;
+      rSeleccionado = ss.infoHidraulica(widget.noOrden);
+      llenado();
+    }
+  }
 
   void group01(values) {
     setState(() {
-      opcFuga = values.toString();
+      if (wDisabled == false) {
+        opcFuga = values.toString();
+      } else {}
     });
   }
 
   void group02(values) {
     setState(() {
-      opcConRuido = values.toString();
+      if (wDisabled == false) {
+        opcConRuido = values.toString();
+      } else {}
     });
   }
 
   void group03(values) {
     setState(() {
-      opcAltaPresion = values.toString();
+      if (wDisabled == false) {
+        opcAltaPresion = values.toString();
+      } else {}
     });
   }
 
   void group04(values) {
     setState(() {
-      opcRetorno = values.toString();
+      if (wDisabled == false) {
+        opcRetorno = values.toString();
+      } else {}
     });
   }
 
   void group05(values) {
     setState(() {
-      opcLcremallera = values.toString();
+      if (wDisabled == false) {
+        opcLcremallera = values.toString();
+      } else {}
     });
   }
 
   void group06(values) {
     setState(() {
-      opcRcremallera = values.toString();
+      if (wDisabled == false) {
+        opcRcremallera = values.toString();
+      } else {}
     });
+  }
+
+  void llenado() {
+    setState(() {
+      opcFuga = rSeleccionado[0];
+      opcConRuido = rSeleccionado[1];
+      opcAltaPresion = rSeleccionado[2];
+      opcRetorno = rSeleccionado[3];
+      opcLcremallera = rSeleccionado[4];
+      opcRcremallera = rSeleccionado[5];
+      obserController.text = rSeleccionado[6];
+    });
+  }
+
+  void actualizar() {
+    wDisabled = true;
+    rSeleccionado = ss.infoHidraulica(widget.noOrden);
+    llenado();
   }
 
   @override
@@ -102,8 +150,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fuga[0],
                                   groupValue: opcFuga,
                                   onChanged: (value) {
@@ -111,8 +160,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Fuga[1],
                                   groupValue: opcFuga,
                                   onChanged: (value) {
@@ -132,8 +182,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: ConRuido[0],
                                   groupValue: opcConRuido,
                                   onChanged: (value) {
@@ -141,8 +192,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: ConRuido[1],
                                   groupValue: opcConRuido,
                                   onChanged: (value) {
@@ -172,8 +224,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: AltaPresion[0],
                                   groupValue: opcAltaPresion,
                                   onChanged: (value) {
@@ -181,8 +234,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: AltaPresion[1],
                                   groupValue: opcAltaPresion,
                                   onChanged: (value) {
@@ -212,8 +266,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Retorno[0],
                                   groupValue: opcRetorno,
                                   onChanged: (value) {
@@ -221,8 +276,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Retorno[1],
                                   groupValue: opcRetorno,
                                   onChanged: (value) {
@@ -255,8 +311,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lcremallera[0],
                                   groupValue: opcLcremallera,
                                   onChanged: (value) {
@@ -264,8 +321,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lcremallera[1],
                                   groupValue: opcLcremallera,
                                   onChanged: (value) {
@@ -273,8 +331,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Lcremallera[2],
                                   groupValue: opcLcremallera,
                                   onChanged: (value) {
@@ -295,8 +354,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                             child: Row(
                               children: [
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rcremallera[0],
                                   groupValue: opcRcremallera,
                                   onChanged: (value) {
@@ -304,8 +364,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rcremallera[1],
                                   groupValue: opcRcremallera,
                                   onChanged: (value) {
@@ -313,8 +374,9 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                                   },
                                 ),
                                 Radio(
-                                  fillColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                  fillColor: wDisabled == true
+                                      ? MaterialStatePropertyAll(Colors.white38)
+                                      : MaterialStatePropertyAll(Colors.white),
                                   value: Rcremallera[2],
                                   groupValue: opcRcremallera,
                                   onChanged: (value) {
@@ -329,57 +391,50 @@ class _Servicio_dir_hidraulica extends State<Servicio_dir_hidraulica> {
                       Padding(
                         padding: const EdgeInsets.all(10),
                         child: TextField(
+                          controller: obserController,
                           maxLines: 10,
                           minLines: 6,
                           decoration: InputDecoration(
                               hintText: 'Observaciones',
-                              fillColor: Theme.of(context).secondaryHeaderColor,
+                              fillColor: wDisabled == true
+                                  ? Colors.white54
+                                  : Theme.of(context).secondaryHeaderColor,
                               filled: true,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  elevation: 5,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 35, vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  backgroundColor: Color(0xFF95A6DC)),
-                              onPressed: () {},
-                              child: Text(
-                                'Guardar',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 5,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 35, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              backgroundColor: Color(0xFF95A6DC)),
+                          onPressed: () {
+                            ss.addHidraulica(
+                                widget.noOrden,
+                                opcFuga!,
+                                opcConRuido!,
+                                opcAltaPresion!,
+                                opcRetorno!,
+                                opcLcremallera!,
+                                opcRcremallera!,
+                                obserController.text);
+                            actualizar();
+                          },
+                          child: Text(
+                            'Guardar',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 5,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 35, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                backgroundColor: Color(0xFF95A6DC)),
-                            onPressed: () {},
-                            child: Text(
-                              'Cancelar',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

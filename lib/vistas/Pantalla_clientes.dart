@@ -89,7 +89,14 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
                                   elevation: 0,
                                   padding: EdgeInsets.only(
                                       left: 25, right: 25, bottom: 5, top: 5)),
-                              onPressed: () {},
+                              onPressed: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //       //Pantalla
+                                //     ));
+                              },
                               child: Container_clientes(
                                   nombre: e.nombre,
                                   telefono: e.telefono,

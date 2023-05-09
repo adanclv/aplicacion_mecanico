@@ -73,7 +73,7 @@ class Container_tasks extends StatelessWidget {
             ),
             SizedBox(height: 10),
             SizedBox(
-              width: 200,
+              width: 250,
               height: tamano(),
               child: ListView(
                 physics: NeverScrollableScrollPhysics(),

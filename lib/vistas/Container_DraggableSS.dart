@@ -1,4 +1,5 @@
 import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
+import 'package:aplicacion_mecanico/controlador/Save_servicio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,16 +18,16 @@ class Container_DraggableSS extends StatefulWidget {
   State<Container_DraggableSS> createState() => _Container_DraggableSS();
 }
 
-Crear_cliente newCliente = Crear_cliente();
-
 class _Container_DraggableSS extends State<Container_DraggableSS> {
+  Crear_cliente newCliente = Crear_cliente();
+  Save_servicio ss = Save_servicio();
   List<Widget> paginas = [];
   List<String> lista_servicios = [];
 
   @override
   void initState() {
     super.initState();
-    lista_servicios = newCliente.list_servicios(widget.nombre, false);
+    lista_servicios = ss.list_servicios(widget.nombre);
     paginas = newCliente.list_paginas(lista_servicios, widget.noOrden);
   }
 
