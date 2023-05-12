@@ -18,11 +18,16 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
   var box = Hive.box('clientesBox').values.toList();
   Crear_cliente newCliente = Crear_cliente();
   List<Cliente> clientes = [];
+  List<String> servicios = [];
 
   @override
   void initState() {
     super.initState();
     clientes = newCliente.listaClientes();
+  }
+
+  void servicio(String nombre, String noOrden) {
+    servicios = newCliente.list_servicios(nombre, noOrden);
   }
 
   @override
@@ -145,9 +150,9 @@ class _Pantalla_clientes extends State<Pantalla_clientes> {
                                       );
                                     },
                                     child: Container_clientes(
-                                        nombre: e.nombre,
-                                        telefono: e.telefono,
-                                        Lservicio: 'Lservicio'),
+                                      nombre: e.nombre,
+                                      telefono: e.telefono,
+                                    ),
                                   ),
                                 )
                                 .toList(),

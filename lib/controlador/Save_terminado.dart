@@ -279,7 +279,6 @@ class Save_terminado {
   void delete(String noOrden) {
     var box = Hive.box('pendientesBox');
     int keyManual = -1;
-    print('sdjfkajslfjs');
 
     if (terminar(noOrden)) {
       for (Pendientes task in box.values) {

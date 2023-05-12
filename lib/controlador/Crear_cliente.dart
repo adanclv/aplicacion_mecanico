@@ -10,6 +10,7 @@ import 'package:aplicacion_mecanico/vistas/Servicio_suspension.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../modelo/Terminado.dart';
 import '../util/container_CupertinoSegmentedControl2.dart';
 
 class Crear_cliente {
@@ -231,6 +232,19 @@ class Crear_cliente {
     return info;
   }
 
+  List<Terminado> listahistorial(String nombre) {
+    List<Terminado> info = [];
+    var box = Hive.box<Terminado>('terminadosBox');
+
+    for (Terminado terminar in box.values) {
+      if (terminar.nombre == nombre) {
+        info.add(terminar);
+      }
+    }
+
+    return info;
+  }
+
   List<Pendientes> listaPendientes() {
     List<Pendientes> info = [];
     var box = Hive.box('pendientesBox');
@@ -239,5 +253,67 @@ class Crear_cliente {
       info.add(task);
     }
     return info;
+  }
+
+  bool existeTer(String nombre) {
+    bool existe = false;
+    var box = Hive.box<Terminado>('terminadosBox');
+
+    for (Terminado terminar in box.values) {
+      if (terminar.nombre == nombre) {
+        existe = true;
+        break;
+      }
+    }
+    print('holas');
+    return existe;
+  }
+
+  List<String> list_servicios(String nombre, String noOrden) {
+    List<String> lista_servicios = [];
+    var box = Hive.box<Terminado>('terminadosBox');
+
+    for (Terminado terminado in box.values) {
+      if (terminado.nombre == nombre && terminado.noOrden == noOrden) {
+        if (terminado.afinacion == 1) {
+          lista_servicios.add('Afinacion');
+        }
+        if (terminado.frenos == 1) {
+          lista_servicios.add('Frenos');
+        }
+        if (terminado.suspension == 1) {
+          lista_servicios.add('Suspension');
+        }
+        if (terminado.hidraulica == 1) {
+          lista_servicios.add('Direccion Hidraulica');
+        }
+      }
+    }
+    return lista_servicios;
+  }
+
+  List<Vehiculo> vehiculos(String nombre) {
+    List<Vehiculo> carro = [];
+    var box = Hive.box('vehiculosBox');
+
+    for (Vehiculo carros in box.values) {
+      if (carros.nombre == nombre) {
+        carro.add(carros);
+      }
+    }
+    print(carro.toList());
+    return carro;
+  }
+
+  List<Terminado> lastServicio(String nombre) {
+    List<Terminado> last = [];
+    var box = Hive.box<Terminado>('terminadosBox');
+
+    for (Terminado terminado in box.values) {
+      if (terminado.nombre == nombre) {
+        last.add(terminado);
+      }
+    }
+    return last;
   }
 }

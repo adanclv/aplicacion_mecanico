@@ -347,12 +347,6 @@ class _Container_facturacion extends State<Container_facturacion> {
                       style: ElevatedButton.styleFrom(elevation: 0),
                       onPressed: () {
                         anan();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PdfPage(noOrden: widget.noOrden),
-                            ));
                         st.imprimir();
                       },
                       child: Text(

@@ -43,6 +43,8 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   final doc = pw.Document(title: 'Flutter School');
   final logoImage = pw.MemoryImage(
       (await rootBundle.load('assets/logo_sociedad.png')).buffer.asUint8List());
+  final logoMeca = pw.MemoryImage(
+      (await rootBundle.load('assets/logo_meca.png')).buffer.asUint8List());
   final footerImage = pw.MemoryImage(
       (await rootBundle.load('assets/piedepagina.jpg')).buffer.asUint8List());
   final logope = pw.MemoryImage(
@@ -59,23 +61,32 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
         children: [
           pw.Image(
             alignment: pw.Alignment.topLeft,
-            logope,
+            logoMeca,
             fit: pw.BoxFit.contain,
             width: 180,
           ),
           pw.Column(
             children: [
-              pw.Text('Servicio Mecanico\nAUTOMOTRIZ MARTINEZ'),
+              pw.Text(
+                'Servicio Mecanico\nAUTOMOTRIZ MARTINEZ',
+                style: pw.TextStyle(font: ttf, fontSize: 15),
+              ),
             ],
           ),
           pw.Container(
             child: pw.Column(
               children: [
                 pw.Container(
-                  child: pw.Text('Factura'),
+                  child: pw.Text(
+                    'Factura',
+                    style: pw.TextStyle(font: ttf, fontSize: 10),
+                  ),
                 ),
                 pw.Container(
-                  child: pw.Text('No. $noOrden'),
+                  child: pw.Text(
+                    'No. $noOrden',
+                    style: pw.TextStyle(font: ttf, fontSize: 10),
+                  ),
                 ),
               ],
             ),
@@ -98,11 +109,13 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.end,
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
                     children: [
-                      pw.Text('Phone: '),
-                      pw.Text('Email: '),
-                      pw.Text('Instagram: '),
+                      pw.Text(
+                          'Direccion: Oaxaca #501, Col. Fco. Javier Mina, 89318, Tampico, Tams'),
+                      pw.Text('Telefonos: 833-228-8884  y  833-267-6594'),
+                      pw.Text(
+                          'Reparacion de Motores, Suspensiones, Servicios de Frenos, Afinaciones FuelInjection, \nDiagnostico con Scanner OBD, Juntas Homocineticas, Bombas Hidraulicas y \nCremalleras de Direccion'),
                     ],
                   ),
 
@@ -132,7 +145,9 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
         pw.Padding(
           padding: pw.EdgeInsets.only(left: 25),
           child: pw.Text(
-              'Cotizacion para Suspension, Condiciones de Motor y Sistema de Enfriamiento'),
+            'Cotizacion para Suspension, Condiciones de Motor y Sistema de Enfriamiento',
+            style: pw.TextStyle(font: ttf, fontSize: 15),
+          ),
         ),
         pw.Padding(
           padding: pw.EdgeInsets.only(left: 25),
@@ -157,7 +172,17 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
         pw.Padding(
           padding: pw.EdgeInsets.only(left: 25),
           child: pw.Text(
-            'Cliente: $nombre',
+            'Cliente:',
+            style: pw.TextStyle(
+              font: ttf,
+              fontSize: 8,
+            ),
+          ),
+        ),
+        pw.Padding(
+          padding: pw.EdgeInsets.only(left: 25),
+          child: pw.Text(
+            '$nombre',
             style: pw.TextStyle(font: ttf, fontSize: 15),
           ),
         ),

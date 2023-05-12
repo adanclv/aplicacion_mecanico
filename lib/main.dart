@@ -111,7 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Pantalla_citas(),
     Pantalla_principal(),
     Pantalla_clientes(),
-    Pantalla_historial()
   ];
 
   void cambiarPagina(int value) {
@@ -180,11 +179,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.contact_emergency_outlined),
                       activeIcon: Icon(Icons.contact_emergency_rounded),
                       label: 'Clientes',
-                      backgroundColor: Color.fromARGB(255, 19, 29, 39)),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.event_repeat_outlined),
-                      activeIcon: Icon(Icons.event_repeat_rounded),
-                      label: 'Historial',
                       backgroundColor: Color.fromARGB(255, 19, 29, 39)),
                 ],
               ),

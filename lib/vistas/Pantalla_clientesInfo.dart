@@ -1,8 +1,11 @@
+import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
 import 'package:aplicacion_mecanico/util/container_lastServicio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../modelo/Terminado.dart';
+import '../modelo/Vehiculos.dart';
 import 'Registro_clientes.dart';
 
 class Pantalla_clientesInfo extends StatefulWidget {
@@ -25,7 +28,21 @@ class Pantalla_clientesInfo extends StatefulWidget {
   State<Pantalla_clientesInfo> createState() => _Pantalla_clientesInfo();
 }
 
+List<Vehiculo> carros = [];
+List<Terminado> last = [];
+
 class _Pantalla_clientesInfo extends State<Pantalla_clientesInfo> {
+  Crear_cliente cc = Crear_cliente();
+
+  @override
+  void initState() {
+    super.initState();
+    carros = cc.vehiculos(widget.nombre);
+    if (cc.existeTer(widget.nombre)) {
+      last = cc.listahistorial(widget.nombre);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,73 +220,85 @@ class _Pantalla_clientesInfo extends State<Pantalla_clientesInfo> {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 8),
-                            shadowColor: Colors.transparent,
-                            backgroundColor: Colors.transparent),
-                        onPressed: () {},
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                  size: 17,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  'Eliminar cliente',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 8),
-                            shadowColor: Colors.transparent,
-                            backgroundColor: Colors.transparent),
-                        onPressed: () {},
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  'Editar cliente',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //           padding: EdgeInsets.symmetric(
+                  //               horizontal: 15, vertical: 8),
+                  //           shadowColor: Colors.transparent,
+                  //           backgroundColor: Colors.transparent),
+                  //       onPressed: () {},
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Icon(
+                  //                 Icons.delete,
+                  //                 color: Colors.red,
+                  //                 size: 17,
+                  //               ),
+                  //               SizedBox(width: 5),
+                  //               Text(
+                  //                 'Eliminar cliente',
+                  //                 style: TextStyle(
+                  //                   fontSize: 17,
+                  //                   color: Colors.red,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //           padding: EdgeInsets.symmetric(
+                  //               horizontal: 15, vertical: 8),
+                  //           shadowColor: Colors.transparent,
+                  //           backgroundColor: Colors.transparent),
+                  //       onPressed: () {},
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Icon(
+                  //                 Icons.edit,
+                  //                 color: Colors.black,
+                  //                 size: 18,
+                  //               ),
+                  //               SizedBox(width: 5),
+                  //               Text(
+                  //                 'Editar cliente',
+                  //                 style: TextStyle(
+                  //                   fontSize: 17,
+                  //                   color: Theme.of(context).primaryColor,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  Text(carros.length > 1 ? 'Vehiculos: ' : 'Vehiculo: ',
+                      style: TextStyle(fontSize: 20)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: carros
+                        .map(
+                          (e) => Text('${e.marca} ${e.modelo} ${e.year}',
+                              style: TextStyle(fontSize: 20)),
+                        )
+                        .toList(),
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
@@ -298,8 +327,29 @@ class _Pantalla_clientesInfo extends State<Pantalla_clientesInfo> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    ElevatedButton(
-                        onPressed: () {}, child: Container_lastServicio()),
+                    cc.existeTer(widget.nombre)
+                        ? Column(
+                            children: last
+                                .map((e) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      child: Container_lastServicio(
+                                          noOrden: e.noOrden,
+                                          vehiculo: e.vehiculo,
+                                          vin: e.vin),
+                                    ))
+                                .toList())
+                        : Center(
+                            child: Text('hoasl'),
+                          ),
+                    // last.map((e) =>
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   child:
+                    //   Container_lastServicio(
+                    //     last: last,
+                    //   ),
+                    // ),),
                   ],
                 ),
               ),

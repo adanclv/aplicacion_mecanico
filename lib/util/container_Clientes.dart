@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 class Container_clientes extends StatelessWidget {
   final String nombre;
   final String telefono;
-  final String Lservicio;
 
-  const Container_clientes(
-      {super.key,
-      required this.nombre,
-      required this.telefono,
-      required this.Lservicio});
+  const Container_clientes({
+    super.key,
+    required this.nombre,
+    required this.telefono,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +46,6 @@ class Container_clientes extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsets.only(left: 30),
-              child: Text(
-                'Ultimo Servicio: $Lservicio',
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-            ),
           ],
         ),
       ),
