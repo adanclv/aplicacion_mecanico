@@ -27,7 +27,7 @@ class _Container_DraggableSS extends State<Container_DraggableSS> {
   @override
   void initState() {
     super.initState();
-    lista_servicios = ss.list_servicios(widget.nombre);
+    lista_servicios = ss.list_servicios(widget.nombre, widget.noOrden);
     paginas = newCliente.list_paginas(lista_servicios, widget.noOrden);
   }
 

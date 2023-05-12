@@ -1,3 +1,4 @@
+import 'package:aplicacion_mecanico/util/container_Facturacion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -47,13 +48,35 @@ class _Pantalla_servicio extends State<Pantalla_servicio> {
         shape: Border(bottom: BorderSide(color: Colors.white38, width: 0.2)),
         title: Text(
           'No. ${widget.noOrden}',
-          style: TextStyle(color: Colors.black, fontSize: 29),
+          style: TextStyle(color: Colors.black, fontSize: 26),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 10, top: 20, bottom: 20),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      children: [
+                        Container(
+                          color: Theme.of(context).primaryColor,
+                          height: 700,
+                          width: 800,
+                          child: Container_facturacion(
+                            noOrden: widget.noOrden,
+                            nombre: widget.nombre,
+                            vin: widget.vin,
+                            vehiculo: widget.vehiculo,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ).whenComplete(() => Navigator.pop(context));
+              },
               child: Text(
                 'Terminar',
                 style: TextStyle(

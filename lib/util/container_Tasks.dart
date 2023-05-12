@@ -6,7 +6,7 @@ class Container_tasks extends StatelessWidget {
   final String nombre;
   final String telefono;
   final String vehiculo;
-  final String placas;
+  final String vin;
 
   Container_tasks(
       {super.key,
@@ -14,21 +14,7 @@ class Container_tasks extends StatelessWidget {
       required this.nombre,
       required this.telefono,
       required this.vehiculo,
-      required this.placas});
-
-  double tamano() {
-    double alto = 0.0;
-    if (servicio.length == 1) {
-      alto = 15.0;
-    } else if (servicio.length == 2) {
-      alto = 40.0;
-    } else if (servicio.length == 3) {
-      alto = 65.0;
-    } else if (servicio.length == 4) {
-      alto = 91.0;
-    }
-    return alto;
-  }
+      required this.vin});
 
   bool check(String servicio) {
     bool doing = false;
@@ -54,7 +40,7 @@ class Container_tasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    servicio = ss.list_servicios(nombre);
+    servicio = ss.list_servicios(nombre, noOrden);
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).secondaryHeaderColor,
@@ -71,29 +57,24 @@ class Container_tasks extends StatelessWidget {
                   fontSize: 26,
                   color: Colors.black),
             ),
-            SizedBox(height: 10),
-            SizedBox(
-              width: 250,
-              height: tamano(),
-              child: ListView(
-                physics: NeverScrollableScrollPhysics(),
-                children: servicio
-                    .map(
-                      (e) => Container(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          e,
-                          style: TextStyle(
-                              fontSize: 17,
-                              color:
-                                  check(e) == true ? Colors.red : Colors.black),
-                        ),
+            SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: servicio
+                  .map(
+                    (e) => Container(
+                      padding: EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        e,
+                        style: TextStyle(
+                            fontSize: 17,
+                            color:
+                                check(e) == true ? Colors.red : Colors.black),
                       ),
-                    )
-                    .toList(),
-              ),
+                    ),
+                  )
+                  .toList(),
             ),
-            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -116,7 +97,9 @@ class Container_tasks extends StatelessWidget {
                   style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
                 Text(
-                  'Placas: $placas',
+                  vin.length > 8
+                      ? 'VIN: ${vin.substring(vin.length - 6)}'
+                      : 'VIN: ${vin.substring(vin.length - 6)}',
                   style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
               ],

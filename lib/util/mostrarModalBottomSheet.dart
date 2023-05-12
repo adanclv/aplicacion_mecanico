@@ -1,3 +1,5 @@
+import 'package:aplicacion_mecanico/controlador/Save_terminado.dart';
+import 'package:aplicacion_mecanico/controlador/prueba.dart';
 import 'package:flutter/material.dart';
 import '../vistas/Registro_clientes.dart';
 import 'botton_add_icon.dart';
@@ -6,6 +8,9 @@ class Mostrar_BottomSheet extends StatefulWidget {
   @override
   State<Mostrar_BottomSheet> createState() =>
       Mostrar_BottomSheetMyWidgetState();
+
+  Prueba p = Prueba();
+  Save_terminado st = Save_terminado();
 
   void mostrarBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -26,6 +31,9 @@ class Mostrar_BottomSheet extends StatefulWidget {
                 height: 40,
                 child: GestureDetector(
                     onTap: () {
+                      p.imprimirDatos();
+                      // p.sumar();
+                      //st.a('08052023-0915');
                       Navigator.pop(context);
                     },
                     child: Icon(Icons.close)),
@@ -37,9 +45,14 @@ class Mostrar_BottomSheet extends StatefulWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Registro_clientes(opcion: 1),
+                      builder: (context) => Registro_clientes(
+                          opcion: 1, titulo: 'Registro Cliente'),
                     ),
-                  ).whenComplete(() => Navigator.pop(context));
+                  ).whenComplete(() {
+                    Navigator.pop(
+                      context,
+                    );
+                  });
                 },
                 child: BottonAddIcon(
                     iconName: Icons.account_circle_rounded,
@@ -49,7 +62,17 @@ class Mostrar_BottomSheet extends StatefulWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE6EFFF), elevation: 0),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Registro_clientes(
+                        opcion: 2,
+                        titulo: 'Agregar Vehiculo',
+                      ),
+                    ),
+                  );
+                },
                 child: BottonAddIcon(
                     iconName: Icons.airport_shuttle_sharp,
                     textName: 'Agregar Vehiculo'),
@@ -58,7 +81,17 @@ class Mostrar_BottomSheet extends StatefulWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE6EFFF), elevation: 0),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Registro_clientes(
+                        opcion: 3,
+                        titulo: 'Agregar Servicio',
+                      ),
+                    ),
+                  );
+                },
                 child: BottonAddIcon(
                     iconName: Icons.build_circle, textName: 'Agregar Servicio'),
               ),

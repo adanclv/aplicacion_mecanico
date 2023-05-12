@@ -13,6 +13,7 @@ class Mostrar_dialog extends StatefulWidget {
 class _Mostrar_dialog extends State<Mostrar_dialog> {
   List<String> clientesN = [];
   String nombreSelec = '';
+  bool a = true;
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
     var box = Hive.box('clientesBox');
 
     for (Cliente clientes in box.values) {
-      if (clientes.nombre.contains('Adan')) {
+      if (clientes.nombre.contains(widget.nombre)) {
         setState(() {
           clientesN.add(clientes.nombre);
         });
@@ -55,17 +56,32 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border(
-                          top: BorderSide(color: Colors.white),
-                          bottom: BorderSide(color: Colors.white),
+                          top: BorderSide(
+                              color: e == nombreSelec
+                                  ? Colors.white
+                                  : Colors.white38),
+                          bottom: BorderSide(
+                              color: e == nombreSelec
+                                  ? Colors.white
+                                  : Colors.white38),
                         ),
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(elevation: 0),
                         onPressed: () {
                           _seleccionado(e);
+                          setState(() {
+                            a = false;
+                          });
                           print(nombreSelec);
                         },
-                        child: Text(e),
+                        child: Text(
+                          e,
+                          style: TextStyle(
+                              color: e == nombreSelec
+                                  ? Colors.white
+                                  : Colors.white38),
+                        ),
                       ),
                     ),
                   ),
@@ -79,7 +95,7 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(elevation: 0),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, 'No existe');
               },
               child: Text(
                 'Cancelar',
@@ -89,8 +105,9 @@ class _Mostrar_dialog extends State<Mostrar_dialog> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(elevation: 0),
               onPressed: () {
-                Ccontains();
-                print(clientesN.toString());
+                //Ccontains();
+                Navigator.pop(context, nombreSelec);
+                print(nombreSelec);
               },
               child: Text(
                 'Aceptar',

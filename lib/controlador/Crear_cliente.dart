@@ -26,7 +26,6 @@ class Crear_cliente {
         cp: cp,
       ),
     );
-    print(box.values.toList());
   }
 
   void addVehiculo(String marca, String modelo, String year, String motor,
@@ -45,7 +44,6 @@ class Crear_cliente {
         nombre: nombre,
       ),
     );
-    print(box.values.toList());
   }
 
   void addTask(
@@ -80,7 +78,6 @@ class Crear_cliente {
           suspension: suspension,
           hidraulica: hidraulica),
     );
-    print(box.values.toList());
   }
 
   Map<int, Widget> mapa_servicios(List<String> lista, int index) {
@@ -131,28 +128,6 @@ class Crear_cliente {
     return lista_servicios;
   }
 
-  Vehiculo info(String nombre, String placas) {
-    var box = Hive.box('vehiculosBox');
-    Vehiculo carro = Vehiculo(
-        marca: '',
-        modelo: '',
-        year: '',
-        motor: '',
-        color: '',
-        vin: '',
-        kms: '',
-        placas: '',
-        nombre: '');
-
-    for (Vehiculo c in box.values) {
-      if (c.nombre == nombre && c.placas == placas) {
-        carro = c;
-        break;
-      }
-    }
-    return carro;
-  }
-
   void showClientes() {
     var box = Hive.box('clientesBox');
     print(box.values.toString());
@@ -178,5 +153,91 @@ class Crear_cliente {
     var box = Hive.box('clientesBox');
     bool vacio = box.values.isNotEmpty;
     return vacio;
+  }
+
+  List<String> selecCliente(String nombre) {
+    List<String> info = [];
+    var box = Hive.box('clientesBox');
+
+    for (Cliente cliente in box.values) {
+      if (cliente.nombre == nombre) {
+        info = [
+          cliente.nombre,
+          cliente.telefono,
+          cliente.calle,
+          cliente.numero,
+          cliente.colonia,
+          cliente.cp,
+        ];
+        break;
+      }
+    }
+    return info;
+  }
+
+  List<String> selecVehiculo(String nombre) {
+    List<String> info = [];
+    var box = Hive.box('vehiculosBox');
+
+    for (Vehiculo vehiculo in box.values) {
+      if (vehiculo.nombre == nombre) {
+        info = [
+          vehiculo.marca,
+          vehiculo.modelo,
+          vehiculo.year,
+          vehiculo.motor,
+          vehiculo.color,
+          vehiculo.vin,
+          vehiculo.kms,
+          vehiculo.placas,
+        ];
+        break;
+      }
+    }
+    return info;
+  }
+
+  List<Cliente> searchClientes(String nombre) {
+    List<Cliente> info = [];
+    var box = Hive.box('clientesBox');
+
+    for (Cliente cliente in box.values) {
+      if (cliente.nombre.contains(nombre)) {
+        info.add(cliente);
+      }
+    }
+    return info;
+  }
+
+  List<Cliente> listaClientes() {
+    List<Cliente> info = [];
+    var box = Hive.box('clientesBox');
+
+    for (Cliente cliente in box.values) {
+      info.add(cliente);
+    }
+    return info;
+  }
+
+  List<Pendientes> searchPendientes(String noOrden) {
+    List<Pendientes> info = [];
+    var box = Hive.box('pendientesBox');
+
+    for (Pendientes task in box.values) {
+      if (task.noOrden.contains(noOrden)) {
+        info.add(task);
+      }
+    }
+    return info;
+  }
+
+  List<Pendientes> listaPendientes() {
+    List<Pendientes> info = [];
+    var box = Hive.box('pendientesBox');
+
+    for (Pendientes task in box.values) {
+      info.add(task);
+    }
+    return info;
   }
 }

@@ -1,5 +1,9 @@
+import 'package:aplicacion_mecanico/controlador/Save_citas.dart';
+import 'package:aplicacion_mecanico/util/container_Citas.dart';
 import 'package:aplicacion_mecanico/vistas/Registro_citas.dart';
 import 'package:flutter/material.dart';
+
+import '../modelo/Citas.dart';
 
 class Pantalla_citas extends StatefulWidget {
   const Pantalla_citas({super.key});
@@ -9,6 +13,8 @@ class Pantalla_citas extends StatefulWidget {
 }
 
 class _Pantalla_citas extends State<Pantalla_citas> {
+  Save_citas sc = Save_citas();
+  List<Citas> cita = [];
   List<String> mesActual = [
     'empty',
     'Enero',
@@ -35,6 +41,12 @@ class _Pantalla_citas extends State<Pantalla_citas> {
     'Sabado',
     'Domingo'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    cita = sc.listaCitas();
+  }
 
   int dayNow = DateTime.now().day;
   int monthNow = DateTime.now().month;
@@ -63,61 +75,72 @@ class _Pantalla_citas extends State<Pantalla_citas> {
                 ),
               ],
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
-                    '${diaSemana[weekdayNow]} $dayNow de ${mesActual[monthNow]} $yearNow',
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 18, letterSpacing: 2),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: EdgeInsets.only(left: 30),
+            //       child: Text(
+            //         '${diaSemana[weekdayNow]} $dayNow de ${mesActual[monthNow]} $yearNow',
+            //         style: TextStyle(
+            //             color: Colors.white, fontSize: 18, letterSpacing: 2),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.dynamic_feed_outlined,
-                      color: Colors.white38,
-                      size: 150,
+              child: sc.existeCitas() == false
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.dynamic_feed_outlined,
+                            color: Colors.white38,
+                            size: 150,
+                          ),
+                          Text(
+                            'No hay Citas',
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
+                          Text(
+                            'Presiona el boton para asignar cita',
+                            style: TextStyle(color: Colors.white38),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ListView(
+                          children: cita
+                              .map(
+                                (e) => Container_citas(
+                                    nombre: e.nombre,
+                                    fecha: e.fecha,
+                                    hora: e.hora,
+                                    vehiculo: e.vehiculo),
+                              )
+                              .toList()),
                     ),
-                    Text(
-                      'No hay Citas',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                    Text(
-                      'Presiona el boton para asignar cita',
-                      style: TextStyle(color: Colors.white38),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 20, bottom: 20),
-              child: FloatingActionButton(
-                backgroundColor: Colors.white,
-                focusColor: Colors.white,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Registro_citas(),
-                    ),
-                  );
-                },
-                child: Icon(
-                  Icons.add,
-                  color: Theme.of(context).primaryColor,
-                  size: 30,
-                ),
-              ),
-            ),
+            )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        focusColor: Colors.white,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Registro_citas(),
+            ),
+          );
+        },
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).primaryColor,
+          size: 30,
         ),
       ),
     );

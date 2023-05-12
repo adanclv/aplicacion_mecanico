@@ -1,4 +1,5 @@
 import 'package:aplicacion_mecanico/modelo/Afinacion.dart';
+import 'package:aplicacion_mecanico/modelo/Citas.dart';
 import 'package:aplicacion_mecanico/modelo/Clientes.dart';
 import 'package:aplicacion_mecanico/modelo/Condicion_motor.dart';
 import 'package:aplicacion_mecanico/modelo/Direccion_Hidraulica.dart';
@@ -6,6 +7,7 @@ import 'package:aplicacion_mecanico/modelo/Frenos.dart';
 import 'package:aplicacion_mecanico/modelo/Pendientes.dart';
 import 'package:aplicacion_mecanico/modelo/Sistema_enfriamiento.dart';
 import 'package:aplicacion_mecanico/modelo/Suspension.dart';
+import 'package:aplicacion_mecanico/modelo/Terminado.dart';
 import 'package:aplicacion_mecanico/modelo/Vehiculos.dart';
 import 'package:aplicacion_mecanico/util/mostrarModalBottomSheet.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_citas.dart';
@@ -16,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'modelo/final.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -29,6 +33,9 @@ void main() async {
   Hive.registerAdapter(Direccion_HidraulicaAdapter());
   Hive.registerAdapter(Condicion_motorAdapter());
   Hive.registerAdapter(Sistema_enfriamientoAdapter());
+  Hive.registerAdapter<Terminado>(TerminadoAdapter());
+  Hive.registerAdapter(CitasAdapter());
+  Hive.registerAdapter(FinalsAdapter());
 
   var box1 = await Hive.openBox('clientesBox');
   var box2 = await Hive.openBox('vehiculosBox');
@@ -39,8 +46,12 @@ void main() async {
   var box7 = await Hive.openBox('hidraulicaBox');
   var box8 = await Hive.openBox('motorBox');
   var box9 = await Hive.openBox('enfriamientoBox');
+  var box10 = await Hive.openBox<Terminado>('terminadosBox');
+  var box11 = await Hive.openBox('citasBox');
 
-//Borrar toda la info
+  // await Hive.deleteBoxFromDisk('terminadosBox');
+  // await Hive.deleteBoxFromDisk('prueba');
+//Borrar todos los datos
   // box1.clear();
   // box2.clear();
   // box3.clear();
@@ -50,6 +61,8 @@ void main() async {
   // box7.clear();
   // box8.clear();
   // box9.clear();
+  // box10.clear();
+  // box11.clear();
 
   runApp(const MainApp());
 }

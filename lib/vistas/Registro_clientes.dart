@@ -1,7 +1,5 @@
 import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
 import 'package:aplicacion_mecanico/util/mostrar_Dialog.dart';
-import 'package:aplicacion_mecanico/vistas/Pantalla_principal.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,7 +7,9 @@ import '../util/text_Info.dart';
 
 class Registro_clientes extends StatefulWidget {
   final int opcion;
-  const Registro_clientes({super.key, required this.opcion});
+  final String titulo;
+  const Registro_clientes(
+      {super.key, required this.opcion, required this.titulo});
 
   @override
   State<Registro_clientes> createState() => _Registro_clientes();
@@ -31,6 +31,7 @@ class _Registro_clientes extends State<Registro_clientes> {
 
   List<bool> _seleccionados = [false, false, false, false];
   List<int> _servicio = [0, 0, 0, 0];
+  var name = '';
   // [afinacion, hidraulica, frenos, suspension]
 
   final TextEditingController nombreController = TextEditingController();
@@ -64,13 +65,44 @@ class _Registro_clientes extends State<Registro_clientes> {
     }
   }
 
-  void search(BuildContext context) {
-    showDialog(
+  void search(BuildContext context) async {
+    name = await showDialog(
       context: context,
       builder: (context) {
         return Mostrar_dialog(nombre: nombreController.text);
       },
     );
+    if (name == 'No existe') {
+      nombreController.text = name;
+    } else {
+      searchCliente(name);
+    }
+
+    if (widget.opcion == 3) searchVehiculo(name);
+  }
+
+  void searchCliente(String nombre) {
+    List<String> info = newCliente.selecCliente(nombre);
+    setState(() {
+      nombreController.text = info[0];
+      telefonoController.text = info[1];
+      calleController.text = info[2];
+      numeroController.text = info[3];
+      coloniaController.text = info[4];
+      cpController.text = info[5];
+    });
+  }
+
+  void searchVehiculo(String nombre) {
+    List<String> info = newCliente.selecVehiculo(nombre);
+    marcaController.text = info[0];
+    modeloController.text = info[1];
+    yearController.text = info[2];
+    motorController.text = info[3];
+    colorController.text = info[4];
+    vinController.text = info[5];
+    kmsController.text = info[6];
+    placasController.text = info[7];
   }
 
   @override
@@ -78,8 +110,8 @@ class _Registro_clientes extends State<Registro_clientes> {
     return Scaffold(
       appBar: AppBar(
         shape: Border(bottom: BorderSide(color: Colors.white38, width: 0.2)),
-        title: Text_info(
-            cadena: 'Registro Cliente', opcion: 1, colores: Colors.white),
+        title:
+            Text_info(cadena: widget.titulo, opcion: 1, colores: Colors.white),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -97,6 +129,7 @@ class _Registro_clientes extends State<Registro_clientes> {
         backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
             systemNavigationBarColor: Color.fromARGB(255, 19, 29, 39)),
       ),
       backgroundColor: Theme.of(context).primaryColor,
@@ -141,6 +174,8 @@ class _Registro_clientes extends State<Registro_clientes> {
                           child: IconButton(
                             onPressed: () {
                               search(context);
+                              //searchCliente(name);
+                              print('cliente $name');
                             },
                             icon: Icon(
                               Icons.search_rounded,
@@ -156,9 +191,14 @@ class _Registro_clientes extends State<Registro_clientes> {
               Padding(
                 padding: EdgeInsets.only(left: 25, right: 25),
                 child: TextField(
+                  readOnly: widget.opcion == 2 ? true : false,
                   controller: telefonoController,
                   cursorColor: Colors.white,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: widget.opcion == 2 || widget.opcion == 3
+                          ? Colors.white38
+                          : Colors.white),
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -185,10 +225,16 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 2 || widget.opcion == 3
+                            ? true
+                            : false,
                         controller: calleController,
                         cursorColor: Colors.white,
                         //maxLength: 30,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 2 || widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -208,10 +254,17 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        readOnly: widget.opcion == 2 || widget.opcion == 3
+                            ? true
+                            : false,
                         controller: numeroController,
                         cursorColor: Colors.white,
                         //maxLength: 5,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 2 || widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -235,10 +288,16 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 2 || widget.opcion == 3
+                            ? true
+                            : false,
                         controller: coloniaController,
                         cursorColor: Colors.white,
                         //maxLength: 30,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 2 || widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -258,10 +317,17 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        readOnly: widget.opcion == 2 || widget.opcion == 3
+                            ? true
+                            : false,
                         controller: cpController,
                         cursorColor: Colors.white,
                         //maxLength: 5,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 2 || widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -289,9 +355,13 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: marcaController,
                         cursorColor: Colors.white,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -310,9 +380,13 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: modeloController,
                         cursorColor: Colors.white,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -338,10 +412,15 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: yearController,
                         cursorColor: Colors.white,
                         //maxLength: 4,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -360,10 +439,14 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: motorController,
                         cursorColor: Colors.white,
                         //maxLength: 15,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -389,10 +472,14 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: colorController,
                         cursorColor: Colors.white,
                         //maxLength: 10,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -411,10 +498,14 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: vinController,
                         cursorColor: Colors.white,
                         //maxLength: 17,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -440,10 +531,15 @@ class _Registro_clientes extends State<Registro_clientes> {
                       width: 200,
                       padding: EdgeInsets.only(left: 25),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: kmsController,
                         cursorColor: Colors.white,
                         //maxLength: 10,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -462,10 +558,14 @@ class _Registro_clientes extends State<Registro_clientes> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 20),
                       child: TextField(
+                        readOnly: widget.opcion == 3 ? true : false,
                         controller: placasController,
                         cursorColor: Colors.white,
                         //maxLength: 7,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: widget.opcion == 3
+                                ? Colors.white38
+                                : Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -585,25 +685,29 @@ class _Registro_clientes extends State<Registro_clientes> {
                           backgroundColor: Color(0xFF95A6DC)),
                       onPressed: () {
                         servicioSeleccionado();
-                        newCliente.addCliente(
-                            nombreController.text,
-                            telefonoController.text,
-                            calleController.text,
-                            numeroController.text,
-                            coloniaController.text,
-                            cpController.text);
-                        newCliente.addVehiculo(
-                            marcaController.text,
-                            modeloController.text,
-                            yearController.text,
-                            motorController.text,
-                            colorController.text,
-                            vinController.text,
-                            kmsController.text,
-                            placasController.text,
-                            nombreController.text);
+                        if (widget.opcion == 1) {
+                          newCliente.addCliente(
+                              nombreController.text,
+                              telefonoController.text,
+                              calleController.text,
+                              numeroController.text,
+                              coloniaController.text,
+                              cpController.text);
+                        }
+                        if (widget.opcion == 1 || widget.opcion == 2) {
+                          newCliente.addVehiculo(
+                              marcaController.text,
+                              modeloController.text,
+                              yearController.text,
+                              motorController.text,
+                              colorController.text,
+                              vinController.text,
+                              kmsController.text,
+                              placasController.text,
+                              nombreController.text);
+                        }
                         newCliente.addTask(
-                            fecha!,
+                            fecha!, //no de Orden
                             nombreController.text,
                             telefonoController.text,
                             marcaController.text,

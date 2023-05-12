@@ -12,6 +12,10 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.13
+  url_launcher: ^6.1.11
+  pdf: ^3.10.1
+  printing: ^5.9.1
+  open_file:  ^3.2.1
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +24,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets: 
+    - assets/logo_sociedad.png
+    - assets/piedepagina.jpg
+    - assets/open-sans.regular.ttf
+    - assets/logo_size.jpg

@@ -511,12 +511,12 @@ class Save_servicio {
   }
 
   //Servicio general
-  List<String> list_servicios(String nombre) {
+  List<String> list_servicios(String nombre, String noOrden) {
     List<String> lista_servicios = [];
     var box = Hive.box('pendientesBox');
 
     for (Pendientes pendientes in box.values) {
-      if (pendientes.nombre == nombre) {
+      if (pendientes.nombre == nombre && pendientes.noOrden == noOrden) {
         if (pendientes.afinacion == 1) {
           if (existeAfinacion(pendientes.noOrden) == true) {
             lista_servicios.add('Afinacion');
@@ -547,7 +547,6 @@ class Save_servicio {
         }
       }
     }
-    print('aha $lista_servicios');
     return lista_servicios;
   }
 }

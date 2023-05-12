@@ -1,11 +1,11 @@
 import 'package:aplicacion_mecanico/controlador/Crear_cliente.dart';
+import 'package:aplicacion_mecanico/controlador/Save_terminado.dart';
 import 'package:aplicacion_mecanico/util/container_Tasks.dart';
 import 'package:aplicacion_mecanico/vistas/Pantalla_servicio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
-import '../controlador/Save_servicio.dart';
+import '../modelo/Pendientes.dart';
 import '../util/container_CupertinoSegmentedControl.dart';
 
 class Pantalla_principal extends StatefulWidget {
@@ -16,17 +16,20 @@ class Pantalla_principal extends StatefulWidget {
 }
 
 class _Pantalla_principal extends State<Pantalla_principal> {
-  Save_servicio sSuspension = Save_servicio();
-
   int indexCupertino = 0;
   int horaActual = DateTime.now().hour;
   String mensaje = '';
   int i = 0;
 
-  List<String> prod = ['holas', 'holads', 'perros'];
-
-  var box = Hive.box('pendientesBox').values.toList();
   Crear_cliente newCliente = Crear_cliente();
+  Save_terminado st = Save_terminado();
+  List<Pendientes> tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    tasks = newCliente.listaPendientes();
+  }
 
   String buenosDTN() {
     if (horaActual > 5 && horaActual <= 11) {
@@ -41,7 +44,7 @@ class _Pantalla_principal extends State<Pantalla_principal> {
 
   void actualizar() {
     setState(() {
-      box = Hive.box('pendientesBox').values.toList();
+      tasks = newCliente.listaPendientes();
     });
   }
 
@@ -89,6 +92,11 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                       borderSide: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.circular(10)),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    tasks = newCliente.searchPendientes(value);
+                  });
+                },
               ),
             ),
             SizedBox(
@@ -150,46 +158,76 @@ class _Pantalla_principal extends State<Pantalla_principal> {
                     ),
                   )
                 : Expanded(
-                    child: ListView(
-                      children: box
-                          .map((e) => ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    padding: EdgeInsets.only(
-                                        left: 15,
-                                        right: 15,
-                                        bottom: 5,
-                                        top: 5)),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Pantalla_servicio(
+                    child: tasks.isEmpty
+                        ? Center(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.assignment_outlined,
+                                      color: Colors.white38, size: 150),
+                                  Text(
+                                    'No existe Pendiente',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 25),
+                                  ),
+                                  Text(
+                                    'Presiona agregar para realizar servicio',
+                                    style: TextStyle(color: Colors.white38),
+                                  ),
+                                  SizedBox(height: 20),
+                                ],
+                              ),
+                            ),
+                          )
+                        : RefreshIndicator(
+                            child: ListView(
+                              children: tasks
+                                  .map(
+                                    (e) => ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          padding: EdgeInsets.only(
+                                              left: 15,
+                                              right: 15,
+                                              bottom: 5,
+                                              top: 5)),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Pantalla_servicio(
+                                                noOrden: e.noOrden,
+                                                nombre: e.nombre,
+                                                telefono: e.telefono,
+                                                vehiculo:
+                                                    '${e.marca} ${e.modelo} ${e.year}',
+                                                placas: e.placas,
+                                                vin: e.vin,
+                                                color: e.color),
+                                          ),
+                                        ).whenComplete(() {
+                                          setState(() {
+                                            st.delete(e.noOrden);
+                                          });
+                                          actualizar();
+                                        });
+                                      },
+                                      child: Container_tasks(
                                           noOrden: e.noOrden,
                                           nombre: e.nombre,
                                           telefono: e.telefono,
                                           vehiculo:
                                               '${e.marca} ${e.modelo} ${e.year}',
-                                          placas: e.placas,
-                                          vin: newCliente
-                                              .info(e.nombre, e.placas)
-                                              .vin,
-                                          color: newCliente
-                                              .info(e.nombre, e.placas)
-                                              .color),
+                                          vin: e.vin),
                                     ),
-                                  ).whenComplete(() => actualizar());
-                                },
-                                child: Container_tasks(
-                                    noOrden: e.noOrden,
-                                    nombre: e.nombre,
-                                    telefono: e.telefono,
-                                    vehiculo:
-                                        '${e.marca} ${e.modelo} ${e.year}',
-                                    placas: e.placas),
-                              ))
-                          .toList(),
-                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            onRefresh: () async {
+                              actualizar();
+                            },
+                          ),
                   ),
           ],
         ),
